@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數位點轉換平台 - 輕鬆將你的數位點轉換成 GASH 點數</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico" />
+
+    <!-- SEO -->
+    <meta name="keyword" content="GADT,數位點,GASH點數,轉換平台,區塊鏈,點數轉換,點數儲值,點數兌換" />
+    <meta name="description"
+        content="數位點轉換平台提供安全且快速的點數轉換服務，可將 Polygon 網路上打造的數位娛樂點數GADT兌換為GASH點數、生活類服務票券等商品，為全新多元商品兌換服務！" />
+
+    <!-- share info -->
+    <meta property="og:locale" content="zh-Hant" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://gashex.gashpoint.com/images/og-img.png" />
+
+    <!-- layout-key-vision -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/page-ontop-desc.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/cookie.css">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div class="fixed-top">
+                <div class="content">
+                    <h1 class="brand-logo"><a href="index.html"><img src="images/logo.svg"></a></h1>
+                    <div class="btns">
+                        <div class="lang">
+                            <button @click="openLang">
+                                <img src="images/icon/ic-global.svg">
+                                <span v-show="activelang === '1'">繁體中文</span>
+                                <span v-show="activelang === '2'">简体中文</span>
+                                <span v-show="activelang === '3'">English</span>
+                            </button>
+                            <ul id="lang-box" class="lang-box">
+                                <!-- ↓目前被選到的品項 <li> 上增加 .active，呈現反灰樣式 -->
+                                <li @click="openLang" v-on:click="activelang='1'"
+                                    v-bind:class="[ activelang === '1' ? 'active' : '' ]">
+                                    繁體中文</li>
+                                <li @click="openLang" v-on:click="activelang='2'"
+                                    v-bind:class="[ activelang === '2' ? 'active' : '' ]">
+                                    简体中文</li>
+                                <li @click="openLang" v-on:click="activelang='3'"
+                                    v-bind:class="[ activelang === '3' ? 'active' : '' ]">
+                                    English</li>
+                            </ul>
+                        </div>
+                        <div class="account">
+                            <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
+                            <!-- 成功連接錢包後，請於 button > p 內放入錢包帳號 -->
+                            <button @click="openSubMenu">
+                                <p>連接錢包</p>
+                            </button>
+                            <div class="subMenu-box desk">
+                                <ul>
+                                    <li class="log-in">
+                                        <span class="log-title">錢包地址</span>
+                                        <a href="#">登出</a>
+                                        <span class="login-id">0x130...123D</span>
+                                    </li>
+                                    <li class="log-out">
+                                        <span class="log-title">beanfun! 會員</span>
+                                        <a href="#">登入</a>
+                                        <span class="login-id">小丸子的玩家暱稱</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="m-nav-icon" @click="openNav">
+                        <img src="images/icon/ic-m-nav.svg">
+                    </button>
+                </div>
+            </div>
+            <nav>
+                <button class="hide" @click="hideNav"><img src="images/icon/ic-m-nav-hide.svg"></button>
+                <ul>
+                    <li><a href="index.html">轉換頁</a></li>
+                    <li><a href="#" target="_blank">轉換教學</a></li>
+                    <li><a href="record.html">轉換紀錄</a></li>
+                    <li><a href="qa.html">常見問題</a></li>
+                    <!-- <li><a href="about.html">關於數位點</a></li> -->
+                </ul>
+                <!-- <div class="lang">
+                    <button @click="openLang_m">
+                        <img src="images/icon/ic-global.svg">
+                        繁體中文
+                    </button>
+                    <ul id="lang-box_m" class="lang-box hidden">
+                        <li>繁體中文</li>
+                        <li>简体中文</li>
+                        <li>English</li>
+                    </ul>
+                </div> -->
+            </nav>
+            <div class="subMenu-box mobile">
+                <div class="content">
+                    <div class="subMenu">
+                        <button class="hide" @click="hideSubMenu"><img src="images/icon/ic-m-nav-hide.svg"></button>
+                        <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
+                        <ul>
+                            <li class="log-in">
+                                <span class="log-title">錢包地址</span>
+                                <a href="#">登出</a>
+                                <span class="login-id">0x130...123D</span>
+                            </li>
+                            <li class="log-out">
+                                <span class="log-title">beanfun! 會員</span>
+                                <a href="#">登入</a>
+                                <span class="login-id">小丸子的玩家暱稱</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="layout-maintenance-dec">
+                <section class="page-ontop-desc">
+                    <img src="images/dec-key-visio-table.svg">
+                    <h1>系統維護中</h1>
+                    <h2>Website Maintenance</h2>
+                    <p class="desc">預計將於 <span>2023/4/14 11:00 AM</span> <span>維護完畢！</span></p>
+                    <p class="sub-desc">We'll be back around <span>2023/MM/DD HH:MM</span> !</p>
+                </section>
+            </div>
+        </main>
+        <footer>
+            <div class="ft-sitemap">
+                <ul>
+                    <li><a href="#">關於GASH</a></li>
+                    <li><a href="service.html">服務條款</a></li>
+                    <li><a href="privacy.html">隱私權政策</a></li>
+                    <li><a href="#">聯繫客服</a></li>
+                </ul>
+            </div>
+            <p>© 2023 GASH POINT Co., Ltd. All right reserved<br>商家名稱：樂點股份有限公司 | 統一編號：53209324</p>
+        </footer>
+        <!-- 遮屏 -->
+        <section class="black-wall" style="display: none;"></section>
+    </div>
+
+
+
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+
+    <script src="js/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    activelang: '1',
+                }
+            },
+            methods: {
+                openLang: function () {
+                    var windowW = window.innerWidth;
+                    $('#lang-box').slideToggle();
+                    // $('body').toggleClass('hidden');
+                    // $('#lang-box').css('z-index', '4');
+                    // $('.subMenu-box').css('z-index', '1');
+                    $('.subMenu-box').slideUp();
+                },
+                openSubMenu: function () {
+                    var windowW = window.innerWidth;
+                    $('.subMenu-box').slideToggle();
+                    // $('body').toggleClass('hidden');
+                    // $('.subMenu-box').css('z-index', '4');
+                    // $('#lang-box').css('z-index', '1');
+                    $('#lang-box').slideUp();
+
+                    if (windowW <= 900) {
+                        $('.black-wall').toggle();
+                    }
+                },
+                hideSubMenu: function () {
+                    $('.black-wall').hide();
+                    $('.subMenu-box').slideToggle();
+                    $('body').removeClass('hidden');
+                },
+                openLang_m: function () {
+                    var windowW = window.innerWidth;
+                    $('#lang-box_m').toggleClass('hidden');
+                    // $('body').toggleClass('hidden');
+                },
+                openNav: function () {
+                    var windowW = window.innerWidth;
+                    $('nav').slideToggle();
+                    $('body').toggleClass('hidden');
+
+                    if (windowW <= 900) {
+                        $('.black-wall').toggle();
+                        $('#lang-box').slideUp();
+                    }
+                },
+                hideNav: function () {
+                    $('.black-wall').hide();
+                    $('nav').slideToggle();
+                    $('body').removeClass('hidden');
+                },
+                hideBlackWall: function () {
+                    var windowW = window.innerWidth;
+                    if (windowW < 768) {
+                        $('.black-wall').hide();
+                        $('nav').hide();
+                        $('.subMenu-box').hide();
+                        $('body').toggleClass('hidden');
+                    } else { }
+                },
+            },
+        });
+
+        $(document).mouseup(function (e) {
+            var windowW = window.innerWidth;
+            var subMenuBox = $(".subMenu-box");
+            var nav = $("nav");
+            var selectNav = $(".select-nav");
+            var selectrBoxNav = $(".selectr-box-nav");
+
+            if (!subMenuBox.is(e.target) && subMenuBox.has(e.target).length === 0 ||
+                !nav.is(e.target) && nav.has(e.target).length === 0 ||
+                !selectNav.is(e.target) && selectNav.has(e.target).length === 0 ||
+                !selectrBoxNav.is(e.target) && selectrBoxNav.has(e.target).length === 0
+            ) {
+                subMenuBox.hide();
+                selectNav.hide();
+                selectrBoxNav.hide();
+                $('.black-wall').hide();
+                $('body').removeClass('hidden');
+
+                if (windowW < 768) {
+                    nav.hide();
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

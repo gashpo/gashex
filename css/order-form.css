@@ -1,0 +1,96 @@
+.order-form {
+  width: 100%;
+  max-width: 488px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: calc(4 * var(--font-size)) calc(3 * var(--font-size)) calc(3.6 * var(--font-size));
+  border-radius: calc(1.6 * var(--font-size));
+  background-color: #FCFCFD;
+  box-shadow: 0px 4px 16px rgba(199, 199, 199, 0.25);
+}
+.order-form .pd-box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: calc(11 * var(--font-size));
+}
+.order-form .pd-box .pd-img {
+  width: 25%;
+  overflow: hidden;
+  border-radius: calc(0.4 * var(--font-size));
+  position: relative;
+}
+.order-form .pd-box .pd-img::before {
+  content: "";
+  display: block;
+  padding-top: 71.3%;
+}
+.order-form .pd-box .pd-img img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.order-form .pd-box .pd-info {
+  width: calc(75% - 2 * var(--font-size));
+}
+.order-form .pd-box .pd-info p {
+  display: flex;
+  align-items: center;
+  margin-bottom: calc(0.8 * var(--font-size));
+  font-size: calc(1.5 * var(--font-size));
+  color: #344054;
+}
+.order-form .pd-box .pd-info p:last-child {
+  margin-bottom: 0;
+}
+.order-form .pd-box .pd-info p.title {
+  font-weight: bold;
+}
+.order-form .pd-box .pd-info p img {
+  width: calc(1.8 * var(--font-size));
+  height: auto;
+  margin-right: calc(0.4 * var(--font-size));
+}
+.order-form a {
+  display: block;
+  width: 100%;
+  padding: calc(1.2 * var(--font-size)) 0;
+  font-size: calc(1.6 * var(--font-size));
+  font-weight: bold;
+  text-align: center;
+  border-radius: calc(10 * var(--font-size));
+}
+.order-form a.cta-btn {
+  margin-bottom: calc(1.5 * var(--font-size));
+}
+
+@media screen and (max-width: 820px) {
+  .order-form {
+    padding: calc(2.4 * var(--font-size));
+  }
+  .order-form .pd-box {
+    display: block;
+    margin-bottom: calc(4 * var(--font-size));
+  }
+  .order-form .pd-box .pd-img {
+    width: 40%;
+    margin: 0 auto calc(3 * var(--font-size));
+  }
+  .order-form .pd-box .pd-info {
+    width: 100%;
+  }
+  .order-form a {
+    display: block;
+    width: 100%;
+    padding: calc(1.2 * var(--font-size)) 0;
+    font-size: calc(1.6 * var(--font-size));
+    font-weight: bold;
+    text-align: center;
+    border-radius: calc(10 * var(--font-size));
+  }
+  .order-form a.cta-btn {
+    margin-bottom: calc(1.5 * var(--font-size));
+  }
+}

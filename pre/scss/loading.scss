@@ -1,0 +1,68 @@
+$gray01: #FCFCFD;
+$gray02: #F9FAFB;
+$gray03: #F2F4F7;
+$gray04: #E4E7EC;
+$gray05: #D0D5DD;
+$gray06: #98A2B3;
+$gray07: #667085;
+$gray08: #475467;
+$gray09: #344054;
+$gray10: #1D2939;
+$gray11: #101828;
+$Primary: #E7316A;
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    ;
+
+    100% {
+        transform: rotate(360deg)
+    }
+
+    ;
+}
+
+
+.loading {
+    width: calc(8 * var(--font-size));
+    height: calc(8 * var(--font-size));
+    overflow: hidden;
+    margin: auto;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 3;
+
+    .loader {
+        display: inline-block;
+        width: calc(8 * var(--font-size));
+        height: calc(8 * var(--font-size));
+        box-sizing: border-box;
+        border: 5px $gray05 solid;
+        border-bottom-color: $Primary;
+        border-radius: 50%;
+        animation: rotation 1.2s linear infinite;
+    }
+}
+
+
+
+
+@media screen and (max-width: 820px) {
+    .loading {
+        width: calc(7 * var(--font-size));
+        height: calc(7 * var(--font-size));
+
+        .loader {
+            width: calc(7 * var(--font-size));
+            height: calc(7 * var(--font-size));
+        }
+    }
+}
+
+//max-width: 820px

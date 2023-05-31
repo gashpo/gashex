@@ -1,0 +1,59 @@
+.popup-product {
+  width: 80%;
+  max-width: 470px;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: calc(4 * var(--font-size));
+  margin: auto;
+  background-color: #fff;
+  border-radius: calc(2.4 * var(--font-size));
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+.popup-product p.title {
+  margin-bottom: calc(2.8 * var(--font-size));
+  text-align: center;
+  font-size: calc(1.8 * var(--font-size));
+  font-weight: 500;
+}
+.popup-product p.desc {
+  margin-bottom: calc(2.8 * var(--font-size));
+  font-size: calc(1.4 * var(--font-size));
+}
+.popup-product a {
+  text-decoration: underline;
+}
+.popup-product button:hover {
+  background-color: #1D2939;
+}
+.popup-product button.cta-btn {
+  width: 100%;
+  padding: calc(1.2 * var(--font-size)) 0;
+  font-size: calc(1.3 * var(--font-size));
+  border-radius: calc(10 * var(--font-size));
+}
+.popup-product button.hide {
+  display: flex;
+  align-items: center;
+  width: calc(3.6 * var(--font-size));
+  height: calc(3.6 * var(--font-size));
+  border-radius: calc(10 * var(--font-size));
+  background-color: #D0D5DD;
+  position: absolute;
+  top: calc(2 * var(--font-size));
+  right: calc(2 * var(--font-size));
+}
+.popup-product button.hide img {
+  display: block;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 516px) {
+  .popup-basic {
+    padding: calc(2.8 * var(--font-size));
+  }
+}

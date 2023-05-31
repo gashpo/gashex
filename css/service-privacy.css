@@ -1,0 +1,32 @@
+.service-privacy p.title {
+  font-size: calc(1.6 * var(--font-size));
+  font-weight: 500;
+  margin-bottom: calc(1.6 * var(--font-size));
+}
+.service-privacy p.desc {
+  margin-bottom: calc(3.6 * var(--font-size));
+  font-size: calc(1.4 * var(--font-size));
+  line-height: 1.6;
+}
+.service-privacy dl {
+  text-align: justify;
+  margin-bottom: calc(3.6 * var(--font-size));
+}
+.service-privacy dl dt {
+  margin-top: calc(1.6 * var(--font-size));
+}
+.service-privacy dl dd ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  text-indent: 0;
+}
+
+@media screen and (max-width: 516px) {
+  .popup-privacy {
+    padding: calc(2.8 * var(--font-size));
+    padding-right: calc(2.2 * var(--font-size));
+  }
+  .popup-privacy .popup-scroll {
+    padding-right: calc(0.6 * var(--font-size));
+  }
+}

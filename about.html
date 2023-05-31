@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數位點轉換平台</title>
+    <link rel="icon" href="images/favicon.ico" type="images/favicon.ico" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico" />
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <!-- layout-key-vision -->
+    <link rel="stylesheet" href="css/about-img.css">
+    <link rel="stylesheet" href="css/about-desc.css">
+    <link rel="stylesheet" href="css/about-card.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/cookie.css">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div class="fixed-top">
+                <div class="content">
+                    <h1 class="brand-logo"><a href="index.html"><img src="images/logo.svg"></a></h1>
+                    <div class="btns">
+                        <div class="lang">
+                            <button @click="openLang">
+                                <img src="images/icon/ic-global.svg">
+                                <span v-show="activelang === '1'">繁體中文</span>
+                                <span v-show="activelang === '2'">简体中文</span>
+                                <span v-show="activelang === '3'">English</span>
+                            </button>
+                            <ul id="lang-box" class="lang-box">
+                                <!-- ↓目前被選到的品項 <li> 上增加 .active，呈現反灰樣式 -->
+                                <li @click="openLang" v-on:click="activelang='1'"
+                                    v-bind:class="[ activelang === '1' ? 'active' : '' ]">
+                                    繁體中文</li>
+                                <li @click="openLang" v-on:click="activelang='2'"
+                                    v-bind:class="[ activelang === '2' ? 'active' : '' ]">
+                                    简体中文</li>
+                                <li @click="openLang" v-on:click="activelang='3'"
+                                    v-bind:class="[ activelang === '3' ? 'active' : '' ]">
+                                    English</li>
+                            </ul>
+                        </div>
+                        <div class="account">
+                            <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
+                            <!-- 成功連接錢包後，請於 button > p 內放入錢包帳號 -->
+                            <button @click="openSubMenu">
+                                <p>連接錢包</p>
+                            </button>
+                            <div class="subMenu-box desk">
+                                <ul>
+                                    <li class="log-in">
+                                        <span class="log-title">錢包地址</span>
+                                        <a href="#">登出</a>
+                                        <span class="login-id">0x130...123D</span>
+                                    </li>
+                                    <li class="log-out">
+                                        <span class="log-title">beanfun! 會員</span>
+                                        <a href="#">登入</a>
+                                        <span class="login-id">小丸子的玩家暱稱</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="m-nav-icon" @click="openNav">
+                        <img src="images/icon/ic-m-nav.svg">
+                    </button>
+                </div>
+            </div>
+            <nav>
+                <button class="hide" @click="hideNav"><img src="images/icon/ic-m-nav-hide.svg"></button>
+                <ul>
+                    <li><a href="index.html">轉換頁</a></li>
+                    <li><a href="#" target="_blank">轉換教學</a></li>
+                    <li><a href="record.html">轉換紀錄</a></li>
+                    <li><a href="qa.html">常見問題</a></li>
+                    <!-- <li><a href="about.html">關於數位點</a></li> -->
+                </ul>
+                <!-- <div class="lang">
+                    <button @click="openLang_m">
+                        <img src="images/icon/ic-global.svg">
+                        繁體中文
+                    </button>
+                    <ul id="lang-box_m" class="lang-box hidden">
+                        <li>繁體中文</li>
+                        <li>简体中文</li>
+                        <li>English</li>
+                    </ul>
+                </div> -->
+            </nav>
+            <div class="subMenu-box mobile">
+                <div class="content">
+                    <div class="subMenu">
+                        <button class="hide" @click="hideSubMenu"><img src="images/icon/ic-m-nav-hide.svg"></button>
+                        <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
+                        <ul>
+                            <li class="log-in">
+                                <span class="log-title">錢包地址</span>
+                                <a href="#">登出</a>
+                                <span class="login-id">0x130...123D</span>
+                            </li>
+                            <li class="log-out">
+                                <span class="log-title">beanfun! 會員</span>
+                                <a href="#">登入</a>
+                                <span class="login-id">小丸子的玩家暱稱</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="layout-about">
+                <h2>什麼是GASH數位點</h2>
+                <section class="about-img">
+                    <img src="images/about/about.png">
+                </section>
+                <section class="about-desc">
+                    <h3>GASH數位點改變傳統遊戲點數業生態</h3>
+                    <ul>
+                        <li>為玩家打造<span>「GASH數位點交換平台」</span>，改變以往玩家購買遊戲點數的方式，玩家可以透過一個安全又便利的轉換機制進行購買與交換GASH點數。</li>
+                        <li>透過區塊鏈技術與特性建立<span>玩家、遊戲點數商、兌換場域</span>的共識機制達到<span>「公正、便利、可追溯」</span>機制，讓玩家從點數取得以及兌換使用都受到保護與控管，提升玩家信賴感。
+                        </li>
+                        <li>將透過合作銀行進行<span>信託履約保證</span>，保障玩家購買與兌換點數的權益。</li>
+                    </ul>
+                </section>
+                <h2>核心服務及特色</h2>
+                <section class="about-card">
+                    <div class="about-card-item">
+                        <div class="about-card-item-img"><img src="images/about/idcard.png"></div>
+                        <h4>身份認證</h4>
+                        <ul>
+                            <li>透過數位交易所進行<span>實名與銀行帳戶驗證</span></li>
+                            <li>只可在<span>官方認證機構</span>進行兌換</li>
+                        </ul>
+                    </div>
+                    <div class="about-card-item">
+                        <div class="about-card-item-img"><img src="images/about/track.png"></div>
+                        <h4>交易追蹤</h4>
+                        <p>結合區塊鏈上存放所有操作和交易紀錄，並且不可竄改的特性，有便於<span>追蹤傳送軌跡</span></p>
+                    </div>
+                    <div class="about-card-item">
+                        <div class="about-card-item-img"><img src="images/about/value.png"></div>
+                        <h4>價值穩定</h4>
+                        <p>透過區塊鏈智能合約明訂數位點數發行數量以及兌換機制，<span>確保價值穩定</span></p>
+                    </div>
+                    <div class="about-card-item">
+                        <div class="about-card-item-img"><img src="images/about/bank.png"></div>
+                        <h4>銀行履約保證</h4>
+                        <p>透過銀行專戶進行履約，<span>保證用戶權益</span></p>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer>
+            <div class="ft-sitemap">
+                <ul>
+                    <li><a href="#">關於GASH</a></li>
+                    <li><a href="service.html">服務條款</a></li>
+                    <li><a href="privacy.html">隱私權政策</a></li>
+                    <li><a href="#">聯繫客服</a></li>
+                </ul>
+            </div>
+            <p>© 2022 GASH POINT Co., Ltd. All right reserved</p>
+        </footer>
+        <!-- 遮屏 -->
+        <section class="black-wall" style="display: none;"></section>
+    </div>
+
+
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+
+    <script src="js/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    activetab: '1',
+                    activelang: '1',
+                    agree: false,
+                    url: './success.html',
+                    selectList: [
+                        {
+                            sell: 1,
+                            point: '1,000',
+                        },
+                        {
+                            sell: 2,
+                            point: '5,000',
+                        },
+                        {
+                            sell: 2,
+                            point: '10,000',
+                        },
+                        {
+                            sell: 1,
+                            point: '20,000',
+                        },
+                    ],
+                    pointList: [
+                        {
+                            state: 1,
+                            img: 'images/icon/ic-dGash.svg',
+                            pointMain: 'GASH',
+                            pointMinor: 'Polygon',
+                        },
+                        {
+                            state: 1,
+                            img: 'images/icon/ic-usdt.svg',
+                            pointMain: 'USDT',
+                            pointMinor: 'Ethereum',
+                        },
+                        {
+                            state: 2,
+                            img: 'images/icon/ic-eth.svg',
+                            pointMain: 'ETH',
+                            pointMinor: 'xxxxx',
+                        },
+                        {
+                            state: 2,
+                            img: 'images/icon/ic-bnb.svg',
+                            pointMain: 'BNB',
+                            pointMinor: 'xxxxx',
+                        },
+                    ],
+                }
+            },
+            methods: {
+                openLang: function () {
+                    var windowW = window.innerWidth;
+                    $('#lang-box').slideToggle();
+                    // $('body').toggleClass('hidden');
+                    // $('#lang-box').css('z-index', '4');
+                    // $('.subMenu-box').css('z-index', '1');
+                    $('.subMenu-box').slideUp();
+                },
+                openSubMenu: function () {
+                    var windowW = window.innerWidth;
+                    $('.subMenu-box').slideToggle();
+                    // $('body').toggleClass('hidden');
+                    // $('.subMenu-box').css('z-index', '4');
+                    // $('#lang-box').css('z-index', '1');
+                    $('#lang-box').slideUp();
+
+                    if (windowW <= 900) {
+                        $('.black-wall').toggle();
+                    }
+                },
+                hideSubMenu: function () {
+                    $('.black-wall').hide();
+                    $('.subMenu-box').slideToggle();
+                    $('body').removeClass('hidden');
+                },
+                openLang_m: function () {
+                    var windowW = window.innerWidth;
+                    $('#lang-box_m').toggleClass('hidden');
+                    // $('body').toggleClass('hidden');
+                },
+                openNav: function () {
+                    var windowW = window.innerWidth;
+                    $('nav').slideToggle();
+                    $('body').toggleClass('hidden');
+
+                    if (windowW <= 900) {
+                        $('.black-wall').toggle();
+                        $('#lang-box').slideUp();
+                    }
+                },
+                hideNav: function () {
+                    $('.black-wall').hide();
+                    $('nav').slideToggle();
+                    $('body').removeClass('hidden');
+                },
+                hideBlackWall: function () {
+                    var windowW = window.innerWidth;
+                    if (windowW < 768) {
+                        $('.black-wall').hide();
+                        $('nav').hide();
+                        $('.subMenu-box').hide();
+                        $('body').toggleClass('hidden');
+                    } else { }
+                },
+                openSelectNav: function () {
+                    $('.select-nav').slideToggle();
+                },
+                openSelectBoxNav: function () {
+                    $('.selectr-box-nav').slideToggle();
+                },
+                cookieHide: function () {
+                    document.getElementsByClassName('cookie')[0].style.display = 'none';
+                },
+                viewRecords() {
+                    window.location.href = this.url;
+                },
+                stepTo: function () {
+                    $('.d-step1').hide();
+                    $('.d-step2').show();
+                    $('.black-wall').show();
+                },
+                stepHide: function () {
+                    $('.black-wall').hide();
+                    $('.popup-teaching').hide()
+                    $('body').removeClass('hidden');
+                },
+                hidePopup: function () {
+                    $('.black-wall').hide();
+                    $('.popup-basic').hide();
+                    $('body').removeClass('hidden');
+                },
+                openPopup: function () {
+                    $('.black-wall').show();
+                    $('.popup-basic').show();
+                    $('body').removeClass('hidden');
+                },
+            },
+        });
+
+        $(document).mouseup(function (e) {
+            var windowW = window.innerWidth;
+            var subMenuBox = $(".subMenu-box");
+            var nav = $("nav");
+            var selectNav = $(".select-nav");
+            var selectrBoxNav = $(".selectr-box-nav");
+            var popupBasic = $(".popup-basic");
+
+            if (!subMenuBox.is(e.target) && subMenuBox.has(e.target).length === 0 ||
+                !nav.is(e.target) && nav.has(e.target).length === 0 ||
+                !selectNav.is(e.target) && selectNav.has(e.target).length === 0 ||
+                !selectrBoxNav.is(e.target) && selectrBoxNav.has(e.target).length === 0 ||
+                !popupBasic.is(e.target) && popupBasic.has(e.target).length === 0
+            ) {
+                subMenuBox.hide();
+                selectNav.hide();
+                selectrBoxNav.hide();
+                popupBasic.hide();
+                $('.black-wall').hide();
+                $('body').removeClass('hidden');
+
+                if (windowW < 768) {
+                    nav.hide();
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

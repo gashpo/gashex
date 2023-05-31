@@ -1,0 +1,26 @@
+.text-markup p.desc-m {
+  margin-bottom: calc(3.6 * var(--font-size));
+  font-size: calc(1.4 * var(--font-size));
+  line-height: 1.6;
+}
+.text-markup p.title {
+  margin-bottom: calc(1.6 * var(--font-size));
+  font-size: calc(1.6 * var(--font-size));
+  font-weight: 500;
+}
+.text-markup p.desc {
+  font-size: calc(1.4 * var(--font-size));
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 820px) {
+  .text-markup p.desc-m {
+    font-size: calc(1.6 * var(--font-size));
+  }
+  .text-markup p.title {
+    font-size: calc(1.8 * var(--font-size));
+  }
+  .text-markup p.desc {
+    font-size: calc(1.6 * var(--font-size));
+  }
+}

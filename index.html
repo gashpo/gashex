@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數位點轉換平台 - 輕鬆將你的數位點轉換成 GASH 點數</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico" />
+
+    <!-- SEO -->
+    <meta name="keyword" content="GADT,數位點,GASH點數,轉換平台,區塊鏈,點數轉換,點數儲值,點數兌換" />
+    <meta name="description"
+        content="數位點轉換平台提供安全且快速的點數轉換服務，可將 Polygon 網路上打造的數位娛樂點數GADT兌換為GASH點數、生活類服務票券等商品，為全新多元商品兌換服務！" />
+
+    <!-- share info -->
+    <meta property="og:locale" content="zh-Hant" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://g-jiuyang.github.io/dGASH/images/og-img.png" />
+
+    <!-- layout-key-vision -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+
+    <link rel="stylesheet" href="css/key-vision-desc.css">
+    <link rel="stylesheet" href="css/key-vision-table.css">
+    <link rel="stylesheet" href="css/sub-banner.css">
+    <link rel="stylesheet" href="css/popup-teaching.css">
+    <link rel="stylesheet" href="css/popup-basic.css">
+    <link rel="stylesheet" href="css/popup-service.css">
+    <link rel="stylesheet" href="css/popup-privacy.css">
+    <link rel="stylesheet" href="css/popup-notice.css">
+    <link rel="stylesheet" href="css/popup-transfer.css">
+    <link rel="stylesheet" href="css/popup-product.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/cookie.css">
+</head>
+
+<body class="hidden">
+    <div id="app">
+        <header>
+            <div class="fixed-top">
+                <div class="content">
+                    <h1 class="brand-logo"><a href="index.html"><img src="images/logo.svg"></a></h1>
+                    <div class="btns">
+                        <div class="lang">
+                            <button @click="openLang">
+                                <img src="images/icon/ic-global.svg">
+                                <span v-show="activelang === '1'">繁體中文</span>
+                                <span v-show="activelang === '2'">简体中文</span>
+                                <span v-show="activelang === '3'">English</span>
+                            </button>
+                            <ul id="lang-box" class="lang-box">
+                                <!-- ↓目前被選到的品項 <li> 上增加 .active，呈現反灰樣式 -->
+                                <li @click="openLang" v-on:click="activelang='1'"
+                                    v-bind:class="[ activelang === '1' ? 'active' : '' ]">
+                                    繁體中文</li>
+                                <li @click="openLang" v-on:click="activelang='2'"
+                                    v-bind:class="[ activelang === '2' ? 'active' : '' ]">
+                                    简体中文</li>
+                                <li @click="openLang" v-on:click="activelang='3'"
+                                    v-bind:class="[ activelang === '3' ? 'active' : '' ]">
+                                    English</li>
+                            </ul>
+                        </div>
+                        <div class="account">
+                            <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
+                            <!-- 成功連接錢包後，請於 button > p 內放入錢包帳號 -->
+                            <button @click="openSubMenu">
+                                <p>連接錢包</p>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="m-nav-icon" @click="openNav">
+                        <img src="images/icon/ic-m-nav.svg">
+                    </button>
+                </div>
+            </div>
+            <nav>
+                <button class="hide" @click="hideNav"><img src="images/icon/ic-m-nav-hide.svg"></button>
+                <ul>
+                    <li class="active"><a href="index.html">轉換頁</a></li>
+                    <li><a href="#" target="_blank">轉換教學</a></li>
+                    <li><a href="record.html">轉換紀錄</a></li>
+                    <li><a href="qa.html">常見問題</a></li>
+                    <!-- <li><a href="about.html">關於數位點</a></li> -->
+                </ul>
+                <!-- <div class="lang">
+                    <button @click="openLang_m">
+                        <img src="images/icon/ic-global.svg">
+                        繁體中文
+                    </button>
+                    <ul id="lang-box_m" class="lang-box hidden">
+                        <li>繁體中文</li>
+                        <li>简体中文</li>
+                        <li>English</li>
+                    </ul>
+                </div> -->
+            </nav>
+            <div class="subMenu-box">
+                <div class="content">
+                    <div class="subMenu">
+                        <button class="hide" @click="hideSubMenu"><img src="images/icon/ic-m-nav-hide.svg"></button>
+                        <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
+                        <ul>
+                            <li class="log-in">
+                                <span class="log-title">錢包地址</span>
+                                <a href="#">登出</a>
+                                <span class="login-id">0x130...123D</span>
+                            </li>
+                            <li class="log-out">
+                                <span class="log-title">beanfun! 會員</span>
+                                <a href="#">登入</a>
+                                <span class="login-id">小丸子的玩家暱稱</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <!-- 當有輪播banner，請於當 class="layout-key-vision" 增加 class:have-sub-banner -->
+            <div class="layout-key-vision">
+                <section class="key-vision-desc">
+                    <p class="title">數位點轉換平台</p>
+                    <p class="subtitle">輕鬆將你的數位點轉換成各種商品</p>
+                    <p class="txt">
+                        2023/01/31前使用 GADT 轉換，<b>至高享92折優惠！</b><br>
+                        同一帳戶累積轉換滿 GASH5,000 點，加碼贈送 GADT100 點 (以此類推)
+                    </p>
+                    <a href="#" target="_blank" class="txt-btn">新增 GADT 到 MetaMask</a>
+                    <a href="#" target="_blank" class="cta-btn">前往活動頁</a>
+                </section>
+                <section class="key-vision-table">
+                    <p class="table-title">
+                        將數位點轉換為
+                        <button class="info-btn" @click="openPopup">
+                            <img src="images/icon/ic-comment.svg">
+                        </button>
+                    </p>
+                    <div class="product">
+                        <div class="select-box" @click="openProductNav">
+                            <div class="box-l" v-if="productItem">
+                                <img :src="productItem.img">
+                                <span>{{productItem.productMain}}</span>
+                            </div>
+                            <div class="box-l" v-else>
+                                <img :src="productList[0].img">
+                                <span>{{productList[0].productMain}}</span>
+                            </div>
+                            <div class="box-r">
+                                <p>&nbsp;</p>
+                            </div>
+                            <div class="product-nav">
+                                <ul>
+                                    <!-- ↓目前被選到的品項 <li> 上增加 .active，呈現反灰樣式 -->
+                                    <template v-for="item,idx in productList">
+                                        <li v-on:click="productItem = item"
+                                            v-bind:class="[ productItem === null && idx === 0 ? 'active' : '', productItem === item ? 'active' : '' ]">
+                                            <img :src="item.img">
+                                            <span>{{item.productMain}}</span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="title">商品</p>
+                    <div class="select-box" @click="openSelectNav">
+                        <div class="box-l" v-if="selectedItem">
+                            <!-- ↓選到項目時字體加粗，用<strong>包起來 -->
+                            <strong>
+                                {{selectedItem.point}} <span>{{selectedItem.subscribe}}</span>
+                            </strong>
+                        </div>
+                        <div class="box-l" v-else>
+                            <!-- 預設顯示「請選擇商品」，且沒有用<strong>包住 -->
+                            請選擇商品
+                        </div>
+                        <div class="box-r">
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="select-nav">
+                            <ul>
+                                <!-- ↓目前被選到的品項 <li> 上增加 .active，呈現反灰樣式 -->
+                                <template v-for="item,idx in selectList">
+                                    <template v-if="item.sell === 1" key="sell">
+                                        <li v-on:click="selectedItem = item"
+                                            v-bind:class="[ selectedItem === item ? 'active' : '' ]">
+                                            {{item.point}}
+                                            <span class="sub">{{item.subscribe}}</span>
+                                        </li>
+                                    </template>
+                                    <template v-if="item.sell === 2" key="sellOut">
+                                        <li class="disabled">
+                                            {{item.point}}
+                                            <span class="sub">{{item.subscribe}}</span>
+                                        </li>
+                                    </template>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="add-amount">
+                        <p class="title">數量</p>
+                        <div class="amount">
+                            <button class="cursor-pointer"><img src="images/icon/ic-minus.svg"></button>
+                            <input id="quantity" type="text" value="9999" class="input-amount">
+                            <!-- 無法點擊時，請於當 button 增加 class="none" -->
+                            <button class="cursor-pointer none"><img src="images/icon/icon-plus.svg"></button>
+                        </div>
+                    </div>
+
+                    <p class="title">領取方式</p>
+                    <div class="tab-menu">
+                        <button v-on:click="activetab='1'" v-bind:class="[ activetab === '1' ? 'active' : '' ]">
+                            領取序號
+                        </button>
+                        <!-- ↓只有選到GASH點數的時候會顯示此按鈕 -->
+                        <button v-if="productItem === null || productItem.bf === 0" v-on:click="activetab='2'"
+                            v-bind:class="[ activetab === '2' ? 'active' : '' ]">
+                            存入 beanfun! 會員錢包
+                        </button>
+                    </div>
+
+
+                    <div class="convert">
+                        <div class="offer">8% off</div>
+                        <div class="point-box">
+                            <p>轉換所需</p>
+                            <div class="change">
+                                <p class="points">920</p>
+                                <div class="selectr-box" @click="openSelectBoxNav">
+                                    <div class="confirm" v-if="pointItem">
+                                        <img :src="pointItem.img">
+                                        <span>{{pointItem.pointMain}}</span>
+                                    </div>
+                                    <div class="confirm" v-else>
+                                        <img :src="pointList[0].img">
+                                        <span>{{pointList[0].pointMain}}</span>
+                                    </div>
+                                    <div class="selectr-box-nav">
+                                        <ul>
+                                            <template v-for="item,idx in pointList">
+                                                <template v-if="item.state === 1" key="stateBlock">
+                                                    <!-- ↓目前被選到的品項 <li> 上增加 .active，呈現反灰樣式 -->
+                                                    <li v-on:click="pointItem = item"
+                                                        v-bind:class="[ pointItem === null && idx === 0 ? 'active' : '', pointItem === item ? 'active' : '' ]">
+                                                        <div class="main">
+                                                            <img :src="item.img">
+                                                            <span>{{item.pointMain}}</span>
+                                                        </div>
+                                                        <div class="minor">{{item.pointMinor}}</div>
+                                                    </li>
+                                                </template>
+                                                <template v-if="item.state === 2" key="stateNone">
+                                                    <li class="disabled">
+                                                        <div class="main"><img
+                                                                :src="item.img"><span>{{item.pointMain}}</span></div>
+                                                        <div class="minor">{{item.pointMinor}}</div>
+                                                    </li>
+                                                </template>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkbox">
+                        <input id="agreement" type="checkbox" v-model="agree">
+                        <label for="agreement">我已閱讀並同意<button @click="openService">服務條款</button>、<button
+                                @click="openPrivacy">隱私權政策</button>與<button @click="openNotice">注意事項</button>
+                        </label>
+                    </div>
+                    <!-- <button class="btn" :disabled="!agree" @click="viewRecords">轉換</button> -->
+                    <button class="btn" :disabled="!agree" @click="openTransfer">轉換</button>
+                </section>
+                <section class="sub-banner">
+                    <ul>
+                        <li>
+                            <a href="#" target="_blank"><img src="images/banner/subBanner.jpg"></a>
+                        </li>
+                    </ul>
+                    <div class="control">
+                        <button></button>
+                        <button class="center"></button>
+                        <button></button>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer>
+            <div class="ft-sitemap">
+                <ul>
+                    <li><a href="#">關於GASH</a></li>
+                    <li><a href="service.html">服務條款</a></li>
+                    <li><a href="privacy.html">隱私權政策</a></li>
+                    <li><a href="#">聯繫客服</a></li>
+                </ul>
+            </div>
+            <p>© 2023 GASH POINT Co., Ltd. All right reserved<br>商家名稱：樂點股份有限公司 | 統一編號：53209324</p>
+        </footer>
+
+        <!-- 遮屏 -->
+        <section class="black-wall"></section>
+        <!-- cookie -->
+        <section class="cookie">
+            <p>我們使用 cookie 來增強您的體驗並分析我們網站使用情況。更多資訊，請參閱我們的<a href="#">隱私權和Cookie聲明</a></p>
+            <button @click="cookieHide">我知道了</button>
+        </section>
+
+        <!-- popup 教學步驟 -->
+        <section class="popup-teaching">
+            <div class="content">
+                <div class="d-step1">
+                    <img src="images/step/d_step1.svg" class="desk">
+                    <img src="images/step/m_step1.svg" class="mobile">
+                    <div class="step-box">
+                        <div class="content-box">
+                            <p class="title">教學 (1/2)</p>
+                            <p class="desc">STEP 1. 連接MetaMask錢包</p>
+                            <div class="step-btn">
+                                <button @click="stepHide">跳過教學</button>
+                                <button @click="stepTo">下一步</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-step2" style="display: none;">
+                    <img src="images/step/d_step2.png" class="desk">
+                    <img src="images/step/m_step2.png" class="mobile">
+                    <div class="step-box">
+                        <div class="content-box">
+                            <p class="title">教學 (2/2)</p>
+                            <p class="desc">STEP 2. 數位點轉換</p>
+                            <div class="step-btn">
+                                <button @click="stepHide">教學完成</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product popup -->
+        <section class="popup-product" style="display: none;">
+            <button class="hide" @click="hideProduct"><img src="images/icon/ic-m-nav-hide.svg"></button>
+            <p class="title">請選擇要轉換的商品</p>
+            <p class="desc">此處內容尚待切版</p>
+        </section>
+        <!-- basic popup -->
+        <section class="popup-basic" style="display: none;">
+            <button class="hide" @click="hidePopup"><img src="images/icon/ic-m-nav-hide.svg"></button>
+            <p class="title">連接錢包</p>
+            <p class="desc">您即將兌換「<b>XXXXX(商品名稱)</b>」x3 ，一旦兌換成功將扣除帳戶內的蟲蟲幣 <b>4,500</b> 顆。</p>
+            <button class="cta-btn">連接錢包</button>
+        </section>
+        <!-- service popup -->
+        <section class="popup-service" style="display: none;">
+            <button class="hide" @click="hideService"><img src="images/icon/ic-m-nav-hide.svg"></button>
+            <p class="title">服務條款</p>
+            <div class="popup-scroll">
+                <p class="sub-title">GASH用戶服務同意書</p>
+                <dl>
+                    <dt>一、遵守使用者規範及法律規定：</dt>
+                    <dd>
+                        <p>當用戶通過訪問後，即可使用樂點股份有限公司(已下稱:本公司)所提供之各項服務(以下稱本服務)。當會員使用本服務時，即表示您除了同意遵守本服務同意書外，亦接受本公司其他針對本服務會員之相關規範（包括但不限於客服中心內容、管理規則、公告及注意事項等）及相關當地法令之規定。
+                        </p>
+                    </dd>
+                    <dt>二、服務簡介：</dt>
+                    <dd>
+                        <ul>
+                            <li>（一）當您通過訪問或使用本服務後，即可開始使用本服務，包括但不限於使用線上遊戲、異業合作、金流儲值服務等。其各項服務內容之所有權仍屬本公司或異業合作廠商及其所約定之人所有，用戶僅得依本服務同意書之約定使用，不得出租、出借、移轉或讓與給其他第三人使用。
+                            </li>
+                            <li>（二）本公司有權增加、變更、取消、停止本服務中相關系統、服務或功能之全部或一部，您同意本公司無須個別通知用戶。為增進用戶權益、擴充服務內容，本公司將致力於提供用戶各項新穎之服務或功能，您同意本用戶服務同意書適用於現有或將來本公司所提供本服務用戶得使用之各項服務。
+                            </li>
+                            <li>（三）點數平台服務：為保障您的交易安全，請使用合法、正當之方式進行相關服務儲值，若您使用虛偽不正之方式進行「儲值」或使用其他相關服務，本公司有權隨時、逕行終止您本服務之用戶資格及使用各項服務之權利；您因故意或誤觸之錯誤而導致造成對本公司非對價關係之權益損失時，您同意無償全力配合本公司之建議並由本公司協助回復此錯誤所導致之損失，包含但不限於在您的儲值點數中扣回已給予的點數或其它權利回復。
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>三、真實登錄義務：</dt>
+                    <dd>
+                        <p>基於本公司所提供之各項服務，您同意於註冊時依註冊申請程序所提示之項目，登錄您本人正確、真實及完整之個人資料；當您的個人資料有異動時，請立即更新，維持您個人資料之正確以利服務訊息通知。如因您登錄不實資料或冒用他人名義以致於侵害他人之權益或違法時，應自負法律責任；個人資料若有不實或異動卻未更新以致與原登錄資料不符時，本公司有權隨時、逕行終止您的會員資格及使用各項會員服務之權利。
+                        </p>
+                        <p>就上述停止、更改服務或終止會員帳戶服務所可能產生之困擾、不便或損害，本公司對任何會員或第三人均不負任何賠償或補償責任。</p>
+                    </dd>
+                    <dt>四、交易異常情形</dt>
+                    <dd>
+                        <ul>
+                            <li>（一）用戶同意可能網路連線問題或其他不可抗拒因素，造成本服務無法提供。用戶應確保所輸入的您的資料無誤，如果因資料錯誤造成本網站於上述異常狀況發生時，無法及時通知用戶相關交易後續處理方式，本公司不承擔任何損害賠償責任。
+                            </li>
+                            <li>（二）因系統故障、網路問題、DDos駭客攻擊等任何意外因素可能導致之異常成交、行情中斷，以及其他可能之異常情況，本公司有權依實際情況取消異常成交結果。</li>
+                        </ul>
+                    </dd>
+                    <dt>五、交易商品之風險</dt>
+                    <dd>
+                        <ul>
+                            <li>（一）數位貨幣交易涉及重大風險，交易或持有數位貨幣很有可能會造成用戶之損失。故用戶應該依據自己的財務狀況，仔細考量是否要進行交易數位貨幣之交易。</li>
+                            <li>（二）本公司不能保證數位貨幣市場的有序穩定，用戶應該在數位貨幣（以及任何其他資產）交易中保持謹慎。數位貨幣市場不像股市有漲跌停限制，且交易24小時皆開放，用戶可能會有大額的盈利或虧損。任何數位貨幣都可能發生大幅度波動，甚至可能變得毫無價值。故用戶應當自行控制風險，評估數位貨幣投資價值和投資風險，承擔損失全部投資的經濟風險。
+                            </li>
+                            <li>（三）用戶在使用本服務時，若用戶或用戶的交易指令出現錯誤（包括但不限於價格，數量等因素）而使用戶的交易出現損失時，若非因本站交易規則之原因，損失責任將由用戶自己承擔。</li>
+                            <li>（四）因國家法律、法規和規範性文件制定或者修改，導致數位貨幣的交易被暫停或禁止，因此造成之損失，或可歸責用戶之原因導致的任何損失均全部由用戶自行承擔。可歸責用戶之原因包括但不限於：不按照交易提示操作、未及時進行交易操作、遺忘或洩漏密碼、密碼被他人破解、用戶使用的設備被他人侵入。
+                            </li>
+                            <li>（五）用戶於使用本服務時，若用戶因網站交易規則中潛在的、尚未發現的某種漏洞而產生的不當得利，本網站將聯繫用戶追回，用戶必須有效予以配合，否則本網站將採取包括但不限於限制賬戶交易、凍結賬戶資金、向有管轄權的法院起訴等措施，因用戶不予有效配合而導致本公司產生之相關費用也將由用戶承擔。
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>六、交易規則</dt>
+                    <dd>
+                        <ul>
+                            <li>（一）用戶聲明且擔保於使用本網站服務與其他用戶進行交易時均須遵守此交易規則。</li>
+                            <li>（二）用戶於交易前應當仔細閱讀交易訊息之全部內容，包括但不限於數位貨幣價格、手續費，用戶完全接受交易訊息中包含的全部內容後方可點擊按鈕進行兌換。</li>
+                            <li>（三）用戶可於會員中心交易記錄中查看相應的兌換記錄，確認用戶之交易記錄。</li>
+                        </ul>
+                    </dd>
+                    <dt>七、用戶規範之增訂及修改：</dt>
+                    <dd>
+                        <p>本服務同意書如有增訂或修改，將公告於本公司官方網站，本網站將不對用戶進行個別通知。如您於服務同意書變更後使用或繼續使用相關服務，將視為您已經瞭解並同意該修訂條款。</p>
+                    </dd>
+                    <dt>八、服務暫停或中斷：</dt>
+                    <dd>
+                        <ul>
+                            <li>
+                                （一）本公司於下列情形之一時，得暫停或中斷本服務之全部或一部，對於用戶不負擔任何賠償或補償責任：
+                                <ol>
+                                    <li>對於本服務相關系統設備進行遷移、更換或維護。</li>
+                                    <li>因不可歸責於本公司所造成之服務停止、中斷、變更或取消。</li>
+                                    <li>因不可抗力所造成服務停止、中斷、變更或取消。</li>
+                                </ol>
+                            </li>
+                            <li>（二）如因本公司對於本網站相關系統設備進行遷移、更換或維護而必須暫停或中斷全部或一部之服務時，本公司於暫停或中斷服務前將於本公司官方網站上公告或以電子郵件進行通知。</li>
+                            <li>（三）請於平時對電腦設備採取適當之安全防護措施，以避免本服務之暫停、中斷可能造成您使用上之不便、資料遺失或其他經濟及時間上之損失，用以保障您的相關權益。</li>
+                        </ul>
+                    </dd>
+                    <dt>九、用戶義務與責任：</dt>
+                    <dd>
+                        <ul>
+                            <li>（一）用戶不得利用本服務會員服務進行任何商業、違法、不當行為。</li>
+                            <li>
+                                （二）除遵守本服務同意書之約定外，您同意遵守本公司之各項服務之營業規章、管理規則、網際網路國際使用慣例與禮節之相關規定，並同意不從事下述所列之行為。若您被判定有以下行為發生時，本公司得逕行移除或刪除該內容與採取後續相關處理措施。違反規定者，本公司將視情節輕重予以停止、更改服務或終止會員帳戶服務之合理處份，您同意本公司有權對嚴重違約之行為人終止本服務條款，並請求因此所生之損害賠償：
+                                <ol>
+                                    <li>意圖破壞、入侵本公司伺服器及官方網站；或有侵入用戶資料庫、散播電腦病毒程式及竊取、更改、破壞本公司電腦設備或他人資訊情事等之行為者。</li>
+                                    <li>未經本公司同意而於服務中以現金或任何有價物品買賣、交易帳號、遊戲道具之行為者。</li>
+                                    <li>以本公司或類似本公司之名義使用本服務者。</li>
+                                    <li>所為言論違背公序良俗者。</li>
+                                    <li>使用本服務被判定有違法、犯罪行為或有相關嫌疑者。</li>
+                                    <li>侵害他人智慧財產權或其他權利或有侵害之虞者。</li>
+                                    <li>有故意妨礙本公司相關服務運作之行為者或造成本公司受有損失或損害者。</li>
+                                    <li>利用申告功能對其他本服務會員隨意誣告或使用本服務有損害他人名譽或侵害他人權利之行為者。</li>
+                                    <li>其他經本公司判定有違公平合理方式使用本服務者。</li>
+                                    <li>其他有危害通信或違反法令之情事或之虞者。</li>
+                                </ol>
+                            </li>
+                            <li>（三）用戶必須對自己所做之行為負一切責任，本公司有權針對上述規定進行不定期查核，但此不表示本公司有義務對用戶傳送、張貼或發表之內容做任何形式或實質之審查。如經本公司察覺或經他人申訴或舉發會員有違反上述各款之情事或之虞時，本公司除有權逕行移除或刪除該內容外，並有權終止或暫停該用戶之資格及各項服務。本公司如因此產生任何損害或損失，並得向該用戶請求賠償。
+                            </li>
+                            <li>（四）用戶同意妥善保管個人之帳號及密碼，不得有與他人共用、租借他人等行為；用戶並應不定期更新個人密碼，並於使用完服務後確實將帳號進行登出動作，以避免帳號遭他人使用。</li>
+                        </ul>
+                    </dd>
+                    <dt>十、責任限制：</dt>
+                    <dd>
+                        <ul>
+                            <li>（一）本服務之各項用戶服務，依本公司既有之規劃提供，對於特定使用者之特殊需求，本公司不擔保本服務將符合您的所有需求。</li>
+                            <li>（二）本公司不擔保各項服務之正確、完整、安全、可靠、合適、時效、穩定、不斷線及出錯。您同意對於您所傳送之電子郵件、檔案及其他資料進行備份或相關處理。對於因傳送過程而造成電子郵件、檔案及其他相關電磁記錄資料之遺失，本公司不負任何擔保責任。
+                            </li>
+                            <li>（三）對於您於本服務中所下載之電子郵件、檔案及其他資料，您應該自行考量其風險，如因下載而造成您電腦系統的損壞或電腦中資料的遺失，本公司不負任何擔保責任。</li>
+                            <li>（四）本服務可能因其他協力廠商或相關電信業者網路系統軟硬體設備之故障或失靈；或人為操作上之疏失而造成中斷、暫時無法使用、遲延、資料傳輸或儲存上之錯誤；或遭第三人侵入系統篡改或偽造變造資料等。本公司就以上不可歸責於己之情形不保證各項服務之穩定、安全、無誤、及不中斷。會員需明白使用本服務之所有風險及可能致生之任何損害，不得因此而要求任何補償或賠償。
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>十一、保管義務：</dt>
+                    <dd>
+                        <p>用戶有義務妥善保管本服務所提供之各類 “身份認證機制” 之安全性與唯一性，包含但不限於用戶個人之帳號、密碼、手機或個人閱讀資訊設備，並為以此組 “身份認證機制”
+                            登入本服務後所進行之一切活動負責。為維護用戶自身權益，請勿將帳號與密碼洩露或提供予第三人知悉，或出借或轉讓他人使用。若會員發現或合理懷疑 “身份認證機制”
+                            遭人非法使用或有任何異常破壞使用安全之情形時，應立即通知本公司；惟倘若因您的保管疏忽而致帳號、密碼遭他人非法使用 或因使用有害軟體導致您的
+                            “身份認證機制”遭他人使用時，本公司將不負責處理。</p>
+                    </dd>
+                    <dt>十二、資料處理：</dt>
+                    <dd>
+                        <p>對於用戶所登錄或留存之資料，用戶同意本公司及關係企業或合作對象，得於合理之範圍內蒐集、處理、保存、傳遞及使用該等資料，以提供用戶其他資訊或服務；或作成用戶統計資料、進行關於網路行為之調查或研究或為任何之合法使用。
+                        </p>
+                    </dd>
+                    <dt>十三、隱私權保護：</dt>
+                    <dd>
+                        <p>關於您的用戶特定資料依「隱私權政策」受到保護與規範。您了解當您使用本服務時，您同意本公司依據「隱私權政策」進行您個人資料的蒐集、處理與利用。</p>
+                    </dd>
+                    <dt>十四、用戶內容之保留：</dt>
+                    <dd>
+                        <p>本公司不對於用戶所傳送、張貼或發表之內容（包括但不限於文字、圖片、音樂、影像、軟體、資訊及各種資料等）進行任何形式或實質之審查，亦不擔保其正確、完整、安全或可靠。用戶對於使用由其他用戶所提供之內容應自行考量其風險。
+                        </p>
+                    </dd>
+                    <dt>十五、智慧財產權：</dt>
+                    <dd>
+                        <p>本公司上之所有著作及資料，其著作權、專利權、商標等智慧財產權、所有權或其他權利、利益，均為本公司或原權利人所有，除事先經本公司或原權利人之合法授權外，會員不得擅自重製、傳輸、改作、編輯或以其他任何形式、或基於任何目的使用，違者應自負相關之法律責任。
+                        </p>
+                    </dd>
+                    <dt>十六、靜止戶管理：</dt>
+                    <dd>
+                        <p>為保護本服務之經營成本與整體用戶利益，您同意成為本服務用戶後，自您最後一次主動透過本公司執行本服務中所提供之實質交易功能(實質交易功能泛指您透過本公司執行牽涉貨幣或點數或卡片之實質交易關係者或透過執行本服務中所提供之權利交換行為者，包含儲值點數或扣除點數或買賣服務等)之日起算六個月內，如您未再次使用本服務內之各類實質交易功能，此時您的用戶狀態將於次月起列入“靜止戶”狀態；如您的靜止戶狀態期間累計已超過5年，您同意本公司依據
+                            “服務停止”條款終止您於本服務中的所有權益且不因此要求本公司提供任何補償或賠償。</p>
+                    </dd>
+                    <dt>十七、紅利及免費點數使用期限：</dt>
+                    <dd>
+                        <p>紅利及免費點數使用期限皆為獲得或儲值進beanfun!會員錢包帳號日起之次月月底到期，於上述有效期限屆至前已取得但尚未兌換之紅利或免費點數，於有效期間屆至時即自動失效並自本服務系統紀錄中刪除，
+                            您不得再要求兌換任何回饋或服務項目，亦不得要求本公司將紅利或免費點數折算現金或給予其他給付。</p>
+                    </dd>
+                    <dt>十八、服務停止：</dt>
+                    <dd>
+                        <p>為保護本服務之安全性、完整性或保障客戶權益，本公司得不待個別通知，得隨時終止、取消、停止本服務之全部或一部，您同意不因此要求本公司提供任何補償或賠償。</p>
+                    </dd>
+                    <dt>十九、服務條款之增訂及修改：</dt>
+                    <dd>
+                        <p>本公司保留將來新增、修改或刪除本服務之全部或一部之權利，您同意本公司得不另行個別通知，您同意不因此而要求本公司提供任何補償或賠償。</p>
+                    </dd>
+                    <dt>二十、準據法及管轄法院：</dt>
+                    <dd>
+                        <p>本服務條款之解釋及適用，以及會員因使用本服務而與本公司間之權利義務關係，悉依本服務所在地子公司及其相關法令解釋適用之（不含涉外民事法律適用法或其他類似法規）。其因此所生之爭議，您同意以本公司所指定之法院為訴訟法院；此外，若本服務條款有任何一部無效，亦不影響其他部份之效力。
+                        </p>
+                    </dd>
+                </dl>
+            </div>
+        </section>
+        <!-- privacy popup -->
+        <section class="popup-privacy" style="display: none;">
+            <button class="hide" @click="hidePrivacy"><img src="images/icon/ic-m-nav-hide.svg"></button>
+            <p class="title">隱私權政策</p>
+            <div class="popup-scroll">
+                <p class="sub-title">個人資料及隱私權保護政策</p>
+                <p class="desc">為了幫助您瞭解樂點股份有限公司是如何蒐集、處理及利用您的個人資料，相關個人資料及隱私保護政策說明如下︰</p>
+                <p class="sub-title">壹、個人資料保護政策</p>
+                <dl>
+                    <dt>一、本公司的名稱：樂點股份有限公司</dt>
+                    <dt>二、個人資料蒐集之目的：</dt>
+                    <dd>
+                        編號 內容<br>
+                        040 行銷（包含金控共同行銷業務）<br>
+                        067 信用卡、現金卡、轉帳卡或電子票證業務<br>
+                        069 契約、類似契約或其他法律關係事務<br>
+                        090 消費者、客戶管理與服務<br>
+                        098 商業與技術資訊<br>
+                        129 會計與相關服務<br>
+                        135 資（通）訊服務<br>
+                        136 資（通）訊與資料庫管理<br>
+                        137 資通安全與管理<br>
+                        148 網路購物及其他電子商務服務<br>
+                        150 輔助性與後勤支援管理<br>
+                        157 調查、統計與研究分析<br>
+                        173 其他公務機關對目的事業之監督管理<br>
+                        176 其他自然人基於正當性目的所進行個人資料之蒐集處理及利用
+                    </dd>
+                    <dt>三、個人資料蒐集之類別：</dt>
+                    <dd>
+                        編號 內容<br>
+                        C001
+                        辨識個人者。如姓名、地址、室內電話號碼、行動電話、即時通帳號、網路平臺申請之帳號、通訊及戶籍地址、電子郵遞地址、提供網路身分認證或申辦查詢服務之紀錄及其他任何可辨識資料本人者等。<br>
+                        C002 辨識財務者。如金融機構帳戶之號碼與姓名、信用卡或簽帳卡之號碼、個人之其他號碼或帳戶等。<br>
+                        C003 政府資料中之辨識者。如身分證統一編號、護照號碼等。<br>
+                        C011 個人描述。如年齡、性別、出生年月日、出生地、國籍、聲音等。<br>
+                        C093 財務交易。如收付金額、支付方式、往來紀錄等。<br>
+                        C102 約定或契約。如關於交易、商業、法律或其他契約、代理等。
+                    </dd>
+                    <dt>四、個人資料利用的期間、地區、對象及方式：</dt>
+                    <dd>
+                        <ul>
+                            <li>（一）期間︰自您首次使用本服務之日起至您以書面通知樂點刪除相關資料之日止。但法令另有規定或依法需保存之資料者，依其規定。</li>
+                            <li>（二）地區：樂點股份有限公司所在地區與提供服務地區。</li>
+                            <li>（三）對象：樂點股份有限公司。</li>
+                            <li>（四）方式：以電子、書面、電話、電信、網際網路及其他方式於蒐集之特定目的範圍內處理並利用個人資料。</li>
+                        </ul>
+                    </dd>
+                    <dt>五、您可向樂點主張之權利種類及行使方式：</dt>
+                    <dd>
+                        <ul>
+                            <li>
+                                （一）權利種類：
+                                <ol>
+                                    <li>查詢或請求閱覽</li>
+                                    <li>製給複製本</li>
+                                    <li>補充或更正</li>
+                                    <li>請求停止蒐集、處理或利用。</li>
+                                    <li>請求刪除。</li>
+                                </ol>
+                            </li>
+                            <li>
+                                （二）行使方式：
+                                <ol>
+                                    <li>聯繫樂點客服中心gashex@gashpoint.com提出申請。</li>
+                                    <li>樂點將依據您提出可資確認的身分證明文件申請，於法定期間內履行上述義務，但將留下相關文件以資佐證。若您委託他人代為申請者，請另外提出可資確認的身分證明，以備查核。若您申請查詢或請求閱覽個人資料或製給複製本，樂點得酌收相當費用。收費將依樂點所規定的標準辦理。若樂點未能於法定期間內處理您的申請，將會將原因以書面方式告知與您知悉。您亦可在樂點網站的「會員中心」網頁登入您的帳號及密碼，線上即時查閱您的個人資料檔案。若您委託他人代為登入者，您將負完全的責任。
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>六、您有自由選擇提供個人資料之權利，但若不提供時，您將不能使用樂點網站之全部或部分的個人化服務或加值服務，亦無從使樂點履行對您的契約相關權利或義務。</dt>
+                </dl>
+                <p class="sub-title">貳、隱私權保護政策</p>
+                <dl>
+                    <dt>一、您於樂點網站所登錄或留存的個人資料，係由樂點網站蒐集、處理、利用，在未獲得您的同意以前，絕不對樂點關係企業或相關業務合作夥伴(以下稱「樂點相關業務合作夥伴」)以外的第三人任意揭露您的姓名、地址、電子郵件地址及其他依法受保護的個人資料。但下列情形不在此限：
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li>（一）司法或vup y警察機關偵查犯罪需要時。</li>
+                            <li>（二）政府機關依法律程序要求時。</li>
+                            <li>（三）因會員之行為違反法令或本服務相關規範之規定時。</li>
+                            <li>（四）於維護公益或保護本公司或他人權利。</li>
+                        </ul>
+                    </dd>
+                    <dt>二、為提供本服務行銷、市場分析、統計或研究、或為提供會員個人化服務或加值服務之目的，您同意本公司及關係企業、本公司相關業務夥伴，得記錄、保存及利用您在本網站所留存或產生的資料及記錄，並得將您的資料及記錄提供予關係企業或相關業務夥伴，同時在不揭露各該資料的情形下，得公開或使用統計資料。
+                    </dt>
+                    <dt>三、樂點網站會記錄使用者上站的IP位址、及在網站內瀏覽活動等資料，但這些資料僅供樂點、其各子公司及樂點相關業務夥伴內部作網站流量和網路行為調查的總量分析，利於提昇網站的服務品質，同時在不揭露各該資料的情形下，公開或使用統計資料。
+                    </dt>
+                    <dt>四、除符合下列情形之一，樂點不得將個人資料進行前述特定目的外之利用：</dt>
+                    <dd>
+                        <ul>
+                            <li>（一） 法律明文規定；</li>
+                            <li>（二） 增進公共利益；</li>
+                            <li>（三） 為免除當事人之生命、身體、自由或財產上之危險；</li>
+                            <li>（四） 為防止他人權益之重大危害；</li>
+                            <li>（五） 經當事人書面同意。</li>
+                        </ul>
+                    </dd>
+                    <dt>五、為了便利使用者的網頁瀏覽及操作，樂點網站可能使用Cookie技術或其他類似技術，以提供更適合使用者個人需要的服務。Cookie是網站伺服器用來和使用者瀏覽器進行溝通的一種技術，它可能在使用者的電腦中儲存某些資訊。使用者可以經由瀏覽器的設定，取消或限制此項功能。
+                    </dt>
+                    <dt>六、為了保障你的隱私與安全，您的帳號資料由樂點網站現行通行標準的SSL通訊加密系統，保障資料傳送的安全。</dt>
+                    <dt>七、樂點相關網站或網頁可能包含其他網站或網頁的連結。對於此等不屬於樂點網站的網站或網頁，其內容或隱私權政策，均與樂點網站無關。</dt>
+                    <dt>八、樂點於個人資料於蒐集、處理及利用時，皆尊重當事人之權益，依誠實及信用方法為之，且在被規範之特定目的範圍內，最小化處理及利用個人資料。</dt>
+                    <dt>九、使用者若對於本政策，或與個人資料有關的其他事項，可與樂點客服中心聯絡，我們將會提供最完整的說明。</dt>
+                    <dt>十、樂點將會視需要或法令異動，隨時修改本政策，以落實保障您個人資料及隱私權的立意。當我們完成本政策條款修改時，將立即刊登於本網站上，以醒目標示提醒您前往點選閱讀。</dt>
+                </dl>
+            </div>
+        </section>
+        <!-- notice popup -->
+        <section class="popup-notice" style="display: none;">
+            <button class="hide" @click="hideNotice"><img src="images/icon/ic-m-nav-hide.svg"></button>
+            <p class="title">注意事項</p>
+            <div class="popup-scroll">
+                <p class="sub-title">轉換GASH點數前商品注意事項</p>
+                <ol>
+                    <li>商品內容若有變更，依據轉換網站最新公告為主。</li>
+                    <li>請務必確認所轉換的商品為您所需，商品一經轉換，恕無法接受退換貨。</li>
+                    <li>使用虛擬貨幣進行轉換時，會有區塊鏈交易手續費(Gas)產生，交易前請先確認。</li>
+                    <li>其他未盡事宜，悉依中華民國相關法令辦理。樂點股份有限公司保留隨時修改、變更、終止本活動與替換其他等值贈品之權利。</li>
+                    <li>若您選擇的轉換方式為「直儲beanfun!會員錢包限定」，請務必確認欲使用之服務適用會員轉點，商品一經轉換，恕無法接受退換貨。</li>
+                </ol>
+            </div>
+        </section>
+        <!-- transfer popup -->
+        <section class="popup-transfer" style="display: none;">
+            <button class="hide" @click="hideTransfer"><img src="images/icon/ic-m-nav-hide.svg"></button>
+            <p class="title">轉換資訊確認</p>
+            <div class="popup-content">
+                <p class="amount">12,228<span>GASH</span></p>
+                <dl>
+                    <dt>商品名稱</dt>
+                    <dd>GASH 10,000 點</dd>
+                    <dt>轉換方式</dt>
+                    <dd>取得序號</dd>
+                    <dt>數量</dt>
+                    <dd>1</dd>
+                    <!-- Key & Value 可無限增加 (dt=Key, dd=Value) -->
+                </dl>
+                <div class="sub-title">
+                    發票資料
+                    <button id="invoice-info-toggle" class="info-btn"><img src="images/icon/ic-comment.svg"></button>
+                    <div id="invoice-info">
+                        <p class="desc">
+                            財政部於2013年1月1日起正式推動電子發票虛實合一政策！<br>
+                            此政策讓持有共通性載具之消費者，可於消費時作為電子發票之載具，並提供消費者以捐贈碼捐贈予特定受捐贈機關或團體之管道。<br>
+                            有關【共通性載具】與【捐贈碼】詳細介紹與資訊，詳見<a href="https://www.einvoice.nat.gov.tw/index"
+                                target="_blank">財政部電子發票整合服務平台</a>說明。
+                        </p>
+                        <p class="desc">
+                            注意：<br>
+                            如資料有誤導致無法寄達，我們將直接把發票捐贈給(社團法人台灣一起夢想公益協會)<br>
+                            因應財政部推廣無紙化作業，即日起將不再主動寄送紙本發票，若仍有索取紙本需求請與樂點客服聯繫。
+                        </p>
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" id="no-invoice">
+                    <label for="no-invoice">我不需要索取發票，請直接捐贈給指定社團法人( 捐贈碼：510 )</label>
+                </div>
+                <div id="invoice">
+                    <div id="invoice-select" class="selector">
+                        <span>請選擇發票類型</span>
+                        <div>
+                            <ul>
+                                <li id="invoice-select-1">我要捐贈</li>
+                                <li id="invoice-select-2">個人發票</li>
+                                <li id="invoice-select-3">公司用發票</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="invoice-select-content-1" class="invoice-type">
+                        <p>受捐贈機關或團體之捐贈碼 <button class="info-btn"
+                                onclick="window.open('https://www.einvoice.nat.gov.tw/APCONSUMER/BTC603W/', '_blank')"><img
+                                    src="images/icon/ic-comment.svg"></button></p>
+                        <input type="text" value="510" placeholder="請輸入捐贈碼(限數字)">
+                        <p>Email 信箱 (選填)</p>
+                        <input type="email" placeholder="請輸入Email信箱">
+                    </div>
+                    <div id="invoice-select-content-2" class="invoice-type">
+                        <p>*電子發票載具類別 <button class="info-btn"
+                                onClick="window.open('https://www.einvoice.nat.gov.tw/', '_blank')"><img
+                                    src="images/icon/ic-comment.svg"></button></p>
+                        <div id="carrier-select" class="selector">
+                            <span>未持有</span>
+                            <div>
+                                <ul>
+                                    <li id="carrier-select-1">未持有</li>
+                                    <li id="carrier-select-2">手機條碼</li>
+                                    <li id="carrier-select-3">自然憑證條碼</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="text" id="carrier-select-content-2" class="carrier-select-content"
+                            placeholder="請輸入手機條碼">
+                        <input type="text" id="carrier-select-content-3" class="carrier-select-content"
+                            placeholder="請輸入自然憑證條碼">
+                        <p>*Email 信箱</p>
+                        <input class="warning" type="email" placeholder="請輸入Email信箱"
+                            required><!-- required欄位資料錯誤時，增加class="warning"，顯示為紅框 -->
+                        <span class="warning">未填寫完成或格式錯誤</span><!-- required欄位資料錯誤時，增加此行錯誤訊息 -->
+                        <label>此Email信箱僅供寄送電子發票開立通知使用。</label>
+                    </div>
+                    <div id="invoice-select-content-3" class="invoice-type">
+                        <p>*公司抬頭或姓名</p>
+                        <input type="text" placeholder="請輸入公司抬頭或姓名" required>
+                        <p>*統一編號</p>
+                        <input type="text" placeholder="請輸入統一編號" required>
+                        <p>*Email 信箱</p>
+                        <input type="email" placeholder="請輸入Email信箱" required>
+                        <p>*寄送地址(即日起不主動寄送紙本發票)</p>
+                        <div id="county-select" class="selector" required>
+                            <span>請選擇縣市</span>
+                            <div>
+                                <ul>
+                                    <li id="county-1">臺北市</li>
+                                    <li id="county-2">新北市</li>
+                                    <li id="county-3">基隆市</li>
+                                    <li id="county-4">桃園市</li>
+                                    <li id="county-5">新竹縣</li>
+                                    <li id="county-6">苗栗縣</li>
+                                    <li id="county-7">臺中市</li>
+                                    <li id="county-8">彰化縣</li>
+                                    <li id="county-9">南投縣</li>
+                                    <li id="county-10">雲林縣</li>
+                                    <li id="county-11">嘉義縣</li>
+                                    <li id="county-12">臺南市</li>
+                                    <li id="county-13">高雄市</li>
+                                    <li id="county-14">屏東縣</li>
+                                    <li id="county-15">宜蘭縣</li>
+                                    <li id="county-16">花蓮縣</li>
+                                    <li id="county-17">臺東縣</li>
+                                    <li id="county-18">澎湖縣</li>
+                                    <li id="county-19">綠島</li>
+                                    <li id="county-20">蘭嶼</li>
+                                    <li id="county-21">金門縣</li>
+                                    <li id="county-22">馬祖</li>
+                                    <li id="county-23">連江縣</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="city-select" class="selector">
+                            <span>請選擇鄉鎮市區</span>
+                            <div>
+                                <ul>
+                                    <li id="city-1">松山區</li>
+                                    <li id="city-2">信義區</li>
+                                    <li id="city-3">中正區</li>
+                                    <li id="city-4">大同區</li>
+                                    <li id="city-5">中山區</li>
+                                    <li id="city-6">大安區</li>
+                                    <li id="city-7">萬華區</li>
+                                    <li id="city-8">士林區</li>
+                                    <li id="city-9">北投區</li>
+                                    <li id="city-10">內湖區</li>
+                                    <li id="city-11">南港區</li>
+                                    <li id="city-12">文山區</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="text" placeholder="輸入寄送地址，請勿填寫郵政信箱" required>
+                    </div>
+                </div>
+            </div>
+            <p class="warning">報價已過期，請重新取得報價</p> <!-- 下方button倒數結束後才出現此訊息 -->
+            <button id="viewRecords" class="cta-btn" :disabled="!agree" @click="viewRecords">確認兌換 (3s)</button>
+            <!-- 倒數結束後按鈕變為「更新報價」(參考Figma) -->
+        </section>
+        <!-- loading -->
+        <section class="loading" style="display: none;">
+            <span class="loader"></span>
+        </section>
+    </div>
+
+
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+
+    <script src="js/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    activetab: '1',
+                    activeproduct: '1',
+                    activelang: '1',
+                    agree: false,
+                    url: './success.html',
+                    productItem: null,
+                    productList: [
+                        {
+                            img: 'images/logo/Gash.png',
+                            productMain: 'GASH 點數',
+                            bf: 0,
+                        },
+                        {
+                            img: 'images/logo/yoe.png',
+                            productMain: '遊e卡',
+                            bf: 1,
+                        },
+                        {
+                            img: 'images/logo/mycard.png',
+                            productMain: 'Mycard',
+                            bf: 1,
+                        },
+                        {
+                            img: 'images/logo/monster.png',
+                            productMain: '怪物彈珠',
+                            bf: 1,
+                        },
+                        {
+                            img: 'images/logo/survive.png',
+                            productMain: '絕地求生M',
+                            bf: 1,
+                        },
+                        // {
+                        //     img: 'images/logo/whitelight.png',
+                        //     productMain: '白夜極光',
+                        //     bf: 1,
+                        // },
+                    ],
+                    selectedItem: null,
+                    selectList: [
+                        {
+                            sell: 1,
+                            point: 'MonsterStrike 8,000 Point',
+                            subscribe: '(267 orbs + 303 treasure)',
+                        },
+                        {
+                            sell: 2,
+                            point: 'GASH點數 10,000點',
+                            subscribe: null,
+                        },
+                        {
+                            sell: 2,
+                            point: 'GASH點數 5,000點',
+                            subscribe: '(267 orbs + 303 treasure)',
+                        },
+                        {
+                            sell: 1,
+                            point: 'GASH點數 3,000點',
+                            subscribe: '(267 orbs + 303 treasure)',
+                        },
+                        {
+                            sell: 1,
+                            point: 'GASH點數 1,000點',
+                            subscribe: null,
+                        },
+                        {
+                            sell: 1,
+                            point: 'GASH點數 500點',
+                            subscribe: null,
+                        },
+                        {
+                            sell: 1,
+                            point: 'GASH點數 300點',
+                            subscribe: null,
+                        },
+                        {
+                            sell: 1,
+                            point: 'GASH點數 100點',
+                            subscribe: null,
+                        },
+                    ],
+                    pointItem: null,
+                    pointList: [
+                        {
+                            state: 1,
+                            img: 'images/icon/ic-GADT.svg',
+                            pointMain: 'GADT',
+                            pointMinor: 'Polygon',
+                        },
+                        {
+                            state: 1,
+                            img: 'images/icon/ic-usdt.svg',
+                            pointMain: 'USDT',
+                            pointMinor: 'Ethereum',
+                        },
+                        {
+                            state: 2,
+                            img: 'images/icon/ic-eth.svg',
+                            pointMain: 'ETH',
+                            pointMinor: 'xxxxx',
+                        },
+                        {
+                            state: 2,
+                            img: 'images/icon/ic-bnb.svg',
+                            pointMain: 'BNB',
+                            pointMinor: 'xxxxx',
+                        },
+                    ],
+                }
+            },
+            methods: {
+                openLang: function () {
+                    var windowW = window.innerWidth;
+                    $('#lang-box').toggleClass('show');
+                    // $('body').toggleClass('hidden');
+                    $('.subMenu-box').removeClass('show');
+                },
+                openSubMenu: function () {
+                    var windowW = window.innerWidth;
+                    $('.subMenu-box').toggleClass('show');
+                    // $('body').toggleClass('hidden');
+                    $('#lang-box').removeClass('show');
+
+                    if (windowW <= 1024) {
+                        $('.black-wall').toggle();
+                    }
+                },
+                hideSubMenu: function () {
+                    $('.black-wall').hide();
+                    $('.subMenu-box').toggleClass('show');
+                    $('body').removeClass('hidden');
+                },
+                openLang_m: function () {
+                    var windowW = window.innerWidth;
+                    $('#lang-box_m').toggleClass('hidden');
+                    // $('body').toggleClass('hidden');
+                },
+                openNav: function () {
+                    var windowW = window.innerWidth;
+                    $('nav').toggleClass('show');
+                    $('body').toggleClass('hidden');
+
+                    if (windowW <= 1024) {
+                        $('.black-wall').toggle();
+                        $('#lang-box').removeClass('show');
+                    }
+                },
+                hideNav: function () {
+                    $('.black-wall').hide();
+                    $('nav').toggleClass('show');
+                    $('body').removeClass('hidden');
+                },
+                hideBlackWall: function () {
+                    var windowW = window.innerWidth;
+                    if (windowW < 768) {
+                        $('.black-wall').hide();
+                        $('nav').removeClass('show');
+                        $('.subMenu-box').removeClass('show');
+                        $('body').toggleClass('hidden');
+                    }
+                },
+                openProductNav: function () {
+                    if ($(window).width() <= 820) {
+                        $('.product-nav').toggleClass('show');
+                        $('.select-nav').removeClass('show');
+                        $('.selectr-box-nav').removeClass('show');
+                    }
+                },
+                openSelectNav: function () {
+                    $('.select-nav').toggleClass('show');
+                    $('.selectr-box-nav').removeClass('show');
+                    if ($(window).width() <= 820) {
+                        $('.product-nav').removeClass('show');
+                    }
+                },
+                openSelectBoxNav: function () {
+                    $('.selectr-box-nav').toggleClass('show');
+                    $('.select-nav').removeClass('show');
+                    if ($(window).width() <= 820) {
+                        $('.product-nav').removeClass('show');
+                    }
+                },
+                cookieHide: function () {
+                    document.getElementsByClassName('cookie')[0].style.display = 'none';
+                },
+                viewRecords() {
+                    window.location.href = this.url;
+                },
+                stepTo: function () {
+                    $('.d-step1').hide();
+                    $('.d-step2').show();
+                    $('.black-wall').show();
+                },
+                stepHide: function () {
+                    $('.black-wall').hide();
+                    $('.popup-teaching').hide()
+                    $('body').removeClass('hidden');
+                },
+                hidePopup: function () {
+                    $('.black-wall').hide();
+                    $('.popup-basic').hide();
+                    $('body').removeClass('hidden');
+                },
+                openPopup: function () {
+                    $('.black-wall').show();
+                    $('.popup-basic').show();
+                    $('body').addClass('hidden');
+                },
+                hideService: function () {
+                    $('.black-wall').hide();
+                    $('.popup-service').hide();
+                    $('body').removeClass('hidden');
+                },
+                openService: function () {
+                    $('.black-wall').show();
+                    $('.popup-service').show();
+                    $('body').addClass('hidden');
+                },
+                hideTransfer: function () {
+                    $('.black-wall').hide();
+                    $('.popup-transfer').hide();
+                    $('body').removeClass('hidden');
+                },
+                openTransfer: function () {
+                    $('.black-wall').show();
+                    $('.popup-transfer').show();
+                    $('body').addClass('hidden');
+                },
+                hideProduct: function () {
+                    $('.black-wall').hide();
+                    $('.popup-product').hide();
+                    $('body').removeClass('hidden');
+                },
+                openProduct: function () {
+                    $('.black-wall').show();
+                    $('.popup-product').show();
+                    $('body').addClass('hidden');
+                },
+                hidePrivacy: function () {
+                    $('.black-wall').hide();
+                    $('.popup-privacy').hide();
+                    $('body').removeClass('hidden');
+                },
+                openPrivacy: function () {
+                    $('.black-wall').show();
+                    $('.popup-privacy').show();
+                    $('body').addClass('hidden');
+                },
+                hideNotice: function () {
+                    $('.black-wall').hide();
+                    $('.popup-notice').hide();
+                    $('body').removeClass('hidden');
+                },
+                openNotice: function () {
+                    $('.black-wall').show();
+                    $('.popup-notice').show();
+                    $('body').addClass('hidden');
+                },
+            },
+        });
+    </script>
+
+    <script>
+        /*
+                $(document).mouseup(function (e) {
+                    var windowW = window.innerWidth;
+                    var subMenuBox = $(".subMenu-box");
+                    var nav = $("nav");
+                    var selectNav = $(".select-nav");
+                    var selectrBoxNav = $(".selectr-box-nav");
+                    var popupTeaching = $(".popup-teaching");
+                    var popupBasic = $(".popup-basic");
+                    var Transfer = $(".popup-transfer");
+        
+                    if (!subMenuBox.is(e.target) && subMenuBox.has(e.target).length === 0 ||
+                        !nav.is(e.target) && nav.has(e.target).length === 0 ||
+                        !selectNav.is(e.target) && selectNav.has(e.target).length === 0 ||
+                        !selectrBoxNav.is(e.target) && selectrBoxNav.has(e.target).length === 0 ||
+                        !popupBasic.is(e.target) && popupBasic.has(e.target).length === 0 ||
+                        !Transfer.is(e.target) && Transfer.has(e.target).length === 0
+                    ){
+                        subMenuBox.hide();
+                        selectNav.hide(); 
+                        selectrBoxNav.hide();
+                        popupTeaching.hide();
+                        popupBasic.hide();
+                        Transfer.hide();
+                        $('.black-wall').hide();
+                        $('body').removeClass('hidden');
+        
+                        if(windowW < 768){
+                            nav.hide();
+                        }
+                    };
+                });
+        */
+        // 發票資料開合
+        $('#invoice-info-toggle').click(function () {
+            $('#invoice-info').toggleClass('open')
+            setTimeout(function () {
+                // $('.popup-content').scrollTop($('.popup-content').height())
+                $('.popup-content').scrollTop(200)
+            }, 65);
+        })
+
+        // 勾選不要發票
+        $('#no-invoice').click(function () {
+            $('#invoice').toggleClass('hidden')
+            $('#submit').removeAttr('disabled');
+        })
+
+        // 發票下拉選單
+        $('#invoice-select').click(function () {
+            $('#carrier-select').removeClass('open')
+            $('#county-select').removeClass('open')
+            $('#city-select').removeClass('open')
+            $(this).toggleClass('open')
+            setTimeout(function () {
+                $('.popup-content').scrollTop($('.popup-content').height())
+            }, 250);
+        })
+        $(function () {
+            for (let i = 1; i <= 3; i++) {
+                let clickedButton = $('#invoice-select-' + i);
+                let listContent = $('#invoice-select-content-' + i);
+                $(clickedButton).click(function () {
+                    $('#invoice-select span').html($(this).html())
+                    $('#invoice-select span').css('color', '#344054')
+                    $('.invoice-type').removeClass('show')
+                    $(listContent).addClass('show')
+                    $('#submit').removeAttr('disabled')
+                })
+            }
+        });
+
+        // 電子發票載具類別下拉選單
+        $('#carrier-select').click(function () {
+            $('#invoice-select').removeClass('open')
+            $(this).toggleClass('open')
+        })
+        $(function () {
+            for (let i = 1; i <= 3; i++) {
+                let clickedButton = $('#carrier-select-' + i);
+                let listContent = $('#carrier-select-content-' + i);
+                $(clickedButton).click(function () {
+                    $('#carrier-select span').html($(this).html())
+                    $('#carrier-select span').css('color', '#344054')
+                    $('.carrier-select-content').removeClass('show')
+                    $(listContent).addClass('show')
+                })
+            }
+        });
+
+        // 縣市下拉選單
+        $('#county-select').click(function () {
+            $('#invoice-select').removeClass('open')
+            $('#city-select').removeClass('open')
+            $(this).toggleClass('open')
+        })
+        $(function () {
+            for (let i = 1; i <= 23; i++) {
+                let clickedButton = $("#county-" + i);
+                $(clickedButton).click(function () {
+                    $('#county-select span').html($(this).html())
+                    $('#county-select span').css('color', '#344054')
+                })
+            }
+        });
+
+        // 鄉鎮市區下拉選單
+        $('#city-select').click(function () {
+            $('#invoice-select').removeClass('open')
+            $('#county-select').removeClass('open')
+            $(this).toggleClass('open')
+        })
+        $(function () {
+            for (let i = 1; i <= 12; i++) {
+                let clickedButton = $("#city-" + i);
+                $(clickedButton).click(function () {
+                    $('#city-select span').html($(this).html())
+                    $('#city-select span').css('color', '#344054')
+                    console.log(this)
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>

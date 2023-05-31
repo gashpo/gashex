@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數位點轉換平台 - 常見問題</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico" />
+
+    <!-- SEO -->
+    <meta name="keyword" content="GADT,數位點,GASH點數,轉換平台,區塊鏈,點數轉換,點數儲值,點數兌換" />
+    <meta name="description"
+        content="數位點轉換平台提供安全且快速的點數轉換服務，可將 Polygon 網路上打造的數位娛樂點數GADT兌換為GASH點數、生活類服務票券等商品，為全新多元商品兌換服務！" />
+
+    <!-- share info -->
+    <meta property="og:locale" content="zh-Hant" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://gashex.gashpoint.com/images/og-img.png" />
+
+
+    <!-- layout-key-vision -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+
+    <link rel="stylesheet" href="css/qa-list.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/cookie.css">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div class="fixed-top">
+                <div class="content">
+                    <h1 class="brand-logo"><a href="index.html"><img src="images/logo.svg"></a></h1>
+                    <div class="btns">
+                        <div class="lang">
+                            <button @click="openLang">
+                                <img src="images/icon/ic-global.svg">
+                                <span v-show="activelang === '1'">繁體中文</span>
+                                <span v-show="activelang === '2'">简体中文</span>
+                                <span v-show="activelang === '3'">English</span>
+                            </button>
+                            <ul id="lang-box" class="lang-box">
+                                <!-- ↓目前被選到的品項 <li> 上增加 .active，呈現反灰樣式 -->
+                                <li @click="openLang" v-on:click="activelang='1'"
+                                    v-bind:class="[ activelang === '1' ? 'active' : '' ]">
+                                    繁體中文</li>
+                                <li @click="openLang" v-on:click="activelang='2'"
+                                    v-bind:class="[ activelang === '2' ? 'active' : '' ]">
+                                    简体中文</li>
+                                <li @click="openLang" v-on:click="activelang='3'"
+                                    v-bind:class="[ activelang === '3' ? 'active' : '' ]">
+                                    English</li>
+                            </ul>
+                        </div>
+                        <div class="account">
+                            <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
+                            <!-- 成功連接錢包後，請於 button > p 內放入錢包帳號 -->
+                            <button @click="openSubMenu">
+                                <p>連接錢包</p>
+                            </button>
+                            <div class="subMenu-box desk">
+                                <ul>
+                                    <li class="log-in">
+                                        <span class="log-title">錢包地址</span>
+                                        <a href="#">登出</a>
+                                        <span class="login-id">0x130...123D</span>
+                                    </li>
+                                    <li class="log-out">
+                                        <span class="log-title">beanfun! 會員</span>
+                                        <a href="#">登入</a>
+                                        <span class="login-id">小丸子的玩家暱稱</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="m-nav-icon" @click="openNav">
+                        <img src="images/icon/ic-m-nav.svg">
+                    </button>
+                </div>
+            </div>
+            <nav>
+                <button class="hide" @click="hideNav"><img src="images/icon/ic-m-nav-hide.svg"></button>
+                <ul>
+                    <li><a href="index.html">轉換頁</a></li>
+                    <li><a href="#" target="_blank">轉換教學</a></li>
+                    <li><a href="record.html">轉換紀錄</a></li>
+                    <li class="active"><a href="qa.html">常見問題</a></li>
+                    <!-- <li><a href="about.html">關於數位點</a></li> -->
+                </ul>
+                <!-- <div class="lang">
+                    <button @click="openLang_m">
+                        <img src="images/icon/ic-global.svg">
+                        繁體中文
+                    </button>
+                    <ul id="lang-box_m" class="lang-box hidden">
+                        <li>繁體中文</li>
+                        <li>简体中文</li>
+                        <li>English</li>
+                    </ul>
+                </div> -->
+            </nav>
+            <div class="subMenu-box mobile">
+                <div class="content">
+                    <div class="subMenu">
+                        <button class="hide" @click="hideSubMenu"><img src="images/icon/ic-m-nav-hide.svg"></button>
+                        <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
+                        <ul>
+                            <li class="log-in">
+                                <span class="log-title">錢包地址</span>
+                                <a href="#">登出</a>
+                                <span class="login-id">0x130...123D</span>
+                            </li>
+                            <li class="log-out">
+                                <span class="log-title">beanfun! 會員</span>
+                                <a href="#">登入</a>
+                                <span class="login-id">小丸子的玩家暱稱</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <h2>常見問題</h2>
+            <section class="qa-list">
+                <ul>
+                    <template v-for="item,idx in qaList" :key="qa">
+                        <li>
+                            <p class="qa-title" @click="show($event)">{{item.title}}</p>
+                            <p class="qa-desc">{{item.desc}}</p>
+                        </li>
+                    </template>
+                </ul>
+            </section>
+        </main>
+        <footer>
+            <div class="ft-sitemap">
+                <ul>
+                    <li><a href="#">關於GASH</a></li>
+                    <li><a href="service.html">服務條款</a></li>
+                    <li><a href="privacy.html">隱私權政策</a></li>
+                    <li><a href="#">聯繫客服</a></li>
+                </ul>
+            </div>
+            <p>© 2022 GASH POINT Co., Ltd. All right reserved</p>
+        </footer>
+        <!-- 遮屏 -->
+        <section class="black-wall" style="display: none;"></section>
+    </div>
+
+
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+
+    <script src="js/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    activelang: '1',
+                    qaList: [
+                        {
+                            title: '我可以從哪邊取得「GASH數位點」?',
+                            desc: '目前可以從台灣交易所「幣託」 直接購買「GASH數位點」<a href="https://www.bitopro.com/users/sign_up?referrer=886551550" target="_blank">BitoPro交易所</a>為成立於台灣的合法公司。',
+                        },
+                        {
+                            title: '如何從本平台將「GASH數位點」或其他加密貨幣轉換為GASH點數?',
+                            desc: '轉換過程只要三步驟，且享有額外優惠，請見「轉換說明」。',
+                        },
+                        {
+                            title: '只能接受「GASH數位點」轉換為GASH點數嗎?',
+                            desc: '目前支援「GASH數位點」跟USDT 兩種轉換方式，更多轉換管道正在準備中，陸續開放。',
+                        },
+                        {
+                            title: '我可以把GASH點數換回「GASH數位點」或加密貨幣嗎？',
+                            desc: '一旦轉換為GASH點數將無法再次轉換為任何數位點，因此轉換前請務必再三確認。',
+                        },
+                        {
+                            title: '「GASH數位點」是否只能兌換GASH點數?',
+                            desc: '是 ，目前樂點只提供「GASH數位點」進行GASH點數兌換，如有變更再以最新公告為主。',
+                        },
+                        {
+                            title: '「GASH數位點」是否有支援其他場域可以進行兌換?',
+                            desc: '沒有，目前「GASH數位點」只能在樂點指定官方網站進行兌換GASH點數，因此如有遇到其他網站平台提供其他兌換服務時，請注意是否遇到詐騙，並切記請勿提供任何個資，或是傳送「GASH數位點」給對方，以免權益受損，有問題再麻煩與樂點客服聯繫。',
+                        },
+                        {
+                            title: '我的「GASH數位點」可以轉賣嗎？',
+                            desc: '可以至<a href="https://www.bitopro.com/users/sign_up?referrer=886551550" target="_blank">BitoPro交易所</a>掛單轉賣，或是轉移給其他用戶都是可以的連結。',
+                        },
+                        {
+                            title: '「GASH數位點」轉移有什麼規則嗎?',
+                            desc: '將「GASH數位點」在本轉換平台轉移時不會額外扣取費用，但如您是用戶之間互相轉移GASH數位點，每次轉移都會扣取X%的GASH數位點。',
+                        },
+                        {
+                            title: '如何確認是不是詐騙？',
+                            desc: '當您懷疑可能遭遇詐騙時，請勿依從他人指示去操作不知名且需要提供個資的網站、自動櫃員機（ATM）、網路銀行，或進行任何可能涉及金錢支付的動作，並請立即撥打 165 反詐騙專線確認，或與樂點的客服聯繫。',
+                        },
+                        {
+                            title: '「GASH數位點」的資安措施為何?',
+                            desc: '「GASH數位點」對所有用戶訊息傳送採取 SSL 加密技術，並且合規ISO27001國際資安規範，保障所有用戶的個資與資產安全。',
+                        },
+                        {
+                            title: '「GASH數位點」是否有銀行履約信託保證?',
+                            desc: '持有「GASH數位點」的用戶，跟原本GASH遊戲點數一樣受銀行履約保證，保障用戶權益。',
+                        },
+                    ],
+                }
+            },
+            methods: {
+
+                openLang: function () {
+                    var windowW = window.innerWidth;
+                    $('#lang-box').slideToggle();
+                    // $('body').toggleClass('hidden');
+                    // $('#lang-box').css('z-index', '4');
+                    // $('.subMenu-box').css('z-index', '1');
+                    $('.subMenu-box').slideUp();
+                },
+                openSubMenu: function () {
+                    var windowW = window.innerWidth;
+                    $('.subMenu-box').slideToggle();
+                    // $('body').toggleClass('hidden');
+                    // $('.subMenu-box').css('z-index', '4');
+                    // $('#lang-box').css('z-index', '1');
+                    $('#lang-box').slideUp();
+
+                    if (windowW <= 900) {
+                        $('.black-wall').toggle();
+                    }
+                },
+                hideSubMenu: function () {
+                    $('.black-wall').hide();
+                    $('.subMenu-box').slideToggle();
+                    $('body').removeClass('hidden');
+                },
+                openLang_m: function () {
+                    var windowW = window.innerWidth;
+                    $('#lang-box_m').toggleClass('hidden');
+                    // $('body').toggleClass('hidden');
+                },
+                openNav: function () {
+                    var windowW = window.innerWidth;
+                    $('nav').slideToggle();
+                    $('body').toggleClass('hidden');
+
+                    if (windowW <= 900) {
+                        $('.black-wall').toggle();
+                        $('#lang-box').slideUp();
+                    }
+                },
+                hideNav: function () {
+                    $('.black-wall').hide();
+                    $('nav').slideToggle();
+                    $('body').removeClass('hidden');
+                },
+                hideBlackWall: function () {
+                    var windowW = window.innerWidth;
+                    if (windowW < 768) {
+                        $('.black-wall').hide();
+                        $('nav').hide();
+                        $('.subMenu-box').hide();
+                        $('body').toggleClass('hidden');
+                    } else { }
+                },
+                show: function (e) {
+                    const target = e.currentTarget
+                    $(target).siblings('.qa-desc').slideToggle(500);
+                    $(target).toggleClass('action');
+                },
+            },
+        });
+
+        $(document).mouseup(function (e) {
+            var windowW = window.innerWidth;
+            var subMenuBox = $(".subMenu-box");
+            var nav = $("nav");
+            var selectNav = $(".select-nav");
+            var selectrBoxNav = $(".selectr-box-nav");
+
+            if (!subMenuBox.is(e.target) && subMenuBox.has(e.target).length === 0 ||
+                !nav.is(e.target) && nav.has(e.target).length === 0 ||
+                !selectNav.is(e.target) && selectNav.has(e.target).length === 0 ||
+                !selectrBoxNav.is(e.target) && selectrBoxNav.has(e.target).length === 0
+            ) {
+                subMenuBox.hide();
+                selectNav.hide();
+                selectrBoxNav.hide();
+                $('.black-wall').hide();
+                $('body').removeClass('hidden');
+
+                if (windowW < 768) {
+                    nav.hide();
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

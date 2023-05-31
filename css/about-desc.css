@@ -1,0 +1,35 @@
+.about-desc {
+  width: calc(50% - 25px);
+  max-width: 520px;
+  margin-bottom: 50px;
+}
+.about-desc h3 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #344054;
+}
+.about-desc ul {
+  list-style-type: disc;
+  margin-top: 16px;
+  padding-left: 1em;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: justify;
+}
+.about-desc ul li {
+  margin-bottom: 16px;
+}
+.about-desc ul li span {
+  color: #E7316A;
+}
+
+@media screen and (max-width: 820px) {
+  .about-desc {
+    flex: 100%;
+    margin-top: 20px;
+  }
+  .about-desc ul li:last-child {
+    margin-bottom: 10px;
+  }
+}

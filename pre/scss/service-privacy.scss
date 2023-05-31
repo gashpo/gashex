@@ -1,0 +1,67 @@
+$gray01: #FCFCFD;
+$gray02: #F9FAFB;
+$gray03: #F2F4F7;
+$gray04: #E4E7EC;
+$gray05: #D0D5DD;
+$gray06: #98A2B3;
+$gray07: #667085;
+$gray08: #475467;
+$gray09: #344054;
+$gray10: #1D2939;
+$gray11: #101828;
+$Primary: #E7316A;
+$PrimaryB: #F39240;
+
+
+
+
+
+
+
+.service-privacy {
+    p {
+        &.title {
+            font-size: calc(1.6 * var(--font-size));
+            font-weight: 500;
+            margin-bottom: calc(1.6 * var(--font-size));
+        }
+
+        &.desc {
+            margin-bottom: calc(3.6 * var(--font-size));
+            font-size: calc(1.4 * var(--font-size));
+            line-height: 1.6;
+        }
+    }
+
+    dl {
+        text-align: justify;
+        margin-bottom: calc(3.6 * var(--font-size));
+
+        dt {
+            margin-top: calc(1.6 * var(--font-size));
+        }
+
+        dd {
+            ol {
+                list-style-type: decimal;
+                padding-left: 1.5em;
+                text-indent: 0;
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 516px) {
+    .popup-privacy {
+        padding: calc(2.8 * var(--font-size));
+        padding-right: calc(2.2 * var(--font-size));
+
+        .popup-scroll {
+            padding-right: calc(0.6 * var(--font-size));
+        }
+    }
+}
+
+//max-width: 516px

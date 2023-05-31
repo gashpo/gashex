@@ -1,0 +1,15 @@
+.about-img {
+  width: calc(50% - 25px);
+  max-width: 460px;
+  margin-bottom: 50px;
+}
+.about-img img {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 820px) {
+  .about-img {
+    flex: 100%;
+    margin-bottom: 0;
+  }
+}
