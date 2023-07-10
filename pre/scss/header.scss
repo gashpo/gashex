@@ -299,6 +299,7 @@ header {
                     font-size: calc(1.5 * var(--font-size));
                     font-weight: 400;
                     width: max-content;
+                    transition: none;
 
                     &:hover {
                         color: $gray09;
@@ -308,6 +309,24 @@ header {
                 .login-id {
                     flex: 100%;
                     color: $Primary;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    cursor: pointer;
+
+                    span {
+                        color: $gray06;
+                        display: none;
+                        font-size: calc(1.4 * var(--font-size));
+                    }
+
+                    &.active {
+                        cursor: default;
+
+                        span {
+                            display: inline-block;
+                        }
+                    }
                 }
 
                 &.log-out {
