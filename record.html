@@ -16,7 +16,7 @@
     <!-- share info -->
     <meta property="og:locale" content="zh-Hant" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://gashpo.github.io/gashex/images/og-img.png" />
+    <meta property="og:image" content="https://gashex.gashpoint.com/images/og-img.png" />
 
 
     <!-- layout-key-vision -->
@@ -97,16 +97,19 @@
                         <button class="hide" @click="hideSubMenu"><img src="images/icon/ic-m-nav-hide.svg"></button>
                         <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
                         <ul>
-                            <li class="log-in">
+                            <li :class="[isWalletLogIn ? 'log-in' : 'log-out']">
                                 <span class="log-title">錢包地址</span>
-                                <a href="#">登出</a>
-                                <span class="login-id">0x130...123D</span>
+                                <a @click="walletLog" href="javascript:void(0)"
+                                    v-html="isWalletLogIn ? '登出' : '登入'"></a>
+                                <span @click="copyAddr" id="addr" class="login-id" :class="copied? 'active': ''">
+                                    0x130...123D <img src="images/icon/ic-copy.svg"> <span v-show="copied">複製成功</span>
+                                </span>
                             </li>
-                            <li class="log-out">
+                            <!-- <li :class="[isBfLogIn ? 'log-in' : 'log-out']">
                                 <span class="log-title">beanfun! 會員</span>
-                                <a href="#">登入</a>
+                                <a @click="bfLog" href="#" v-html="isBfLogIn ? '登出' : '登入'"></a>
                                 <span class="login-id">小丸子的玩家暱稱</span>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -315,6 +318,9 @@
             data() {
                 return {
                     activelang: '1',
+                    isWalletLogIn: false,
+                    isBfLogIn: false,
+                    copied: false,
                     copy: '0',
                     tableList: [
                         {
@@ -464,6 +470,20 @@
                     $('nav').toggleClass('show');
                     $('body').removeClass('hidden');
                 },
+                walletLog: function () {
+                    this.isWalletLogIn = !this.isWalletLogIn;
+                },
+                bfLog: function () {
+                    this.isBfLogIn = !this.isBfLogIn;
+                },
+                copyAddr: function () {
+                    $('#addr').select();
+                    document.execCommand('copy');
+                    this.copied = true
+                    window.setTimeout(function () {
+                        vm.copied = false
+                    }, 5000);
+                },
                 hideBlackWall: function () {
                     var windowW = window.innerWidth;
                     if (windowW < 768) {
@@ -498,34 +518,6 @@
 
             },
         });
-/*
-                                                                                                                                                                                                                                                                                                                                                                                                        $(document).mouseup(function (e) {
-                                                                                                                                                                                                                                                                                                                                                                                                            var windowW = window.innerWidth;
-                                                                                                                                                                                                                                                                                                                                                                                                            var subMenuBox = $(".subMenu-box");
-                                                                                                                                                                                                                                                                                                                                                                                                            var nav = $("nav");
-                                                                                                                                                                                                                                                                                                                                                                                                            var selectNav = $(".select-nav");
-                                                                                                                                                                                                                                                                                                                                                                                                            var selectrBoxNav = $(".selectr-box-nav");
-                                                                                                                                                                                                                                                                                                                                                                                                            var popupTable = $('.popup-table');
-                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                            if (!subMenuBox.is(e.target) && subMenuBox.has(e.target).length === 0 ||
-                                                                                                                                                                                                                                                                                                                                                                                                                !nav.is(e.target) && nav.has(e.target).length === 0 ||
-                                                                                                                                                                                                                                                                                                                                                                                                                !selectNav.is(e.target) && selectNav.has(e.target).length === 0 ||
-                                                                                                                                                                                                                                                                                                                                                                                                                !selectrBoxNav.is(e.target) && selectrBoxNav.has(e.target).length === 0 ||
-                                                                                                                                                                                                                                                                                                                                                                                                                !popupTable.is(e.target) && popupTable.has(e.target).length === 0
-                                                                                                                                                                                                                                                                                                                                                                                                            ) {
-                                                                                                                                                                                                                                                                                                                                                                                                                subMenuBox.hide();
-                                                                                                                                                                                                                                                                                                                                                                                                                selectNav.hide();
-                                                                                                                                                                                                                                                                                                                                                                                                                selectrBoxNav.hide();
-                                                                                                                                                                                                                                                                                                                                                                                                                popupTable.hide();
-                                                                                                                                                                                                                                                                                                                                                                                                                $('.black-wall').hide();
-                                                                                                                                                                                                                                                                                                                                                                                                                $('body').removeClass('hidden');
-                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                if (windowW < 768) {
-                                                                                                                                                                                                                                                                                                                                                                                                                    nav.hide();
-                                                                                                                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                                                                                                                            };
-                                                                                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                                                                                */
     </script>
 </body>
 

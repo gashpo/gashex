@@ -107,16 +107,17 @@
                         <ul>
                             <li :class="[isWalletLogIn ? 'log-in' : 'log-out']">
                                 <span class="log-title">錢包地址</span>
-                                <a @click="walletLog" href="#" v-html="isWalletLogIn ? '登出' : '登入'"></a>
+                                <a @click="walletLog" href="javascript:void(0)"
+                                    v-html="isWalletLogIn ? '登出' : '登入'"></a>
                                 <span @click="copyAddr" id="addr" class="login-id" :class="copied? 'active': ''">
                                     0x130...123D <img src="images/icon/ic-copy.svg"> <span v-show="copied">複製成功</span>
                                 </span>
                             </li>
-                            <li :class="[isBfLogIn ? 'log-in' : 'log-out']">
+                            <!-- <li :class="[isBfLogIn ? 'log-in' : 'log-out']">
                                 <span class="log-title">beanfun! 會員</span>
                                 <a @click="bfLog" href="#" v-html="isBfLogIn ? '登出' : '登入'"></a>
                                 <span class="login-id">小丸子的玩家暱稱</span>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
