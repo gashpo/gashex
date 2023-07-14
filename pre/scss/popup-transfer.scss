@@ -177,7 +177,7 @@ $PrimaryB: #F39240;
                 position: relative;
                 display: inline-block;
 
-                &:before {
+                &::before {
                     content: "";
                     display: inline-block;
                     width: calc(1.6 * var(--font-size));
@@ -222,7 +222,7 @@ $PrimaryB: #F39240;
                 cursor: pointer;
                 color: $gray05;
 
-                &:after {
+                &::after {
                     content: url(../images/icon/ic-arrow-down.svg);
                     position: absolute;
                     top: 50%;

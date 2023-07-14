@@ -29,6 +29,11 @@ body.hidden {
   overflow: hidden;
 }
 
+@media screen and (max-width: 1200px) {
+  body {
+    background-color: white;
+  }
+}
 #app {
   display: flex;
   flex-direction: column;
@@ -126,7 +131,7 @@ h2 {
 }
 .layout-key-vision {
   display: flex;
-  align-items: center;
+  gap: calc(2.4 * var(--font-size));
   justify-content: space-between;
   position: relative;
 }
@@ -142,10 +147,16 @@ h2 {
 .layout-key-vision.have-sub-banner .sub-banner {
   display: block;
 }
+.layout-key-vision.selected .key-vision-desc {
+  display: none;
+}
+.layout-key-vision.selected .key-vision-table .product-content {
+  display: inline;
+}
 
 @media screen and (max-width: 1200px) {
   .layout-key-vision {
-    display: block;
+    flex-wrap: wrap;
     margin: 0 auto;
   }
   .layout-key-vision.have-sub-banner .key-vision-desc {
@@ -153,6 +164,41 @@ h2 {
   }
   .layout-key-vision.have-sub-banner .key-vision-desc p.txt {
     margin-bottom: calc(2.8 * var(--font-size));
+  }
+  .layout-key-vision.selected .key-vision-desc {
+    display: inline;
+  }
+  .layout-key-vision.selected .key-vision-table {
+    flex-wrap: wrap;
+    border: 1px #E4E7EC solid;
+    border-radius: calc(2.4 * var(--font-size));
+    background-color: #FCFCFD;
+  }
+  .layout-key-vision.selected .key-vision-table .selection {
+    flex: 100%;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    padding: calc(2 * var(--font-size)) calc(1.6 * var(--font-size));
+  }
+  .layout-key-vision.selected .key-vision-table .product-content {
+    flex: 100%;
+    max-width: 100%;
+    max-height: none;
+    padding: calc(2 * var(--font-size)) calc(1.6 * var(--font-size));
+  }
+  .layout-key-vision.selected .key-vision-table .checkout {
+    position: fixed;
+    background-color: white;
+    padding: calc(2 * var(--font-size)) calc(3.2 * var(--font-size));
+    box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.25);
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .layout-key-vision.selected .key-vision-table .checkout .checkbox {
+    margin-top: 0;
+    margin-bottom: calc(1.6 * var(--font-size));
   }
 }
 .layout-success-dec {

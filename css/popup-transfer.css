@@ -136,7 +136,7 @@
   position: relative;
   display: inline-block;
 }
-.popup-transfer .popup-content .checkbox label:before {
+.popup-transfer .popup-content .checkbox label::before {
   content: "";
   display: inline-block;
   width: calc(1.6 * var(--font-size));
@@ -176,7 +176,7 @@
   cursor: pointer;
   color: #D0D5DD;
 }
-.popup-transfer .popup-content .selector span:after {
+.popup-transfer .popup-content .selector span::after {
   content: url(../images/icon/ic-arrow-down.svg);
   position: absolute;
   top: 50%;

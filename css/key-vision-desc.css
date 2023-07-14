@@ -1,13 +1,15 @@
 .key-vision-desc {
   width: 50%;
   max-width: 500px;
+  align-self: center;
+  order: 2;
 }
 .key-vision-desc p.title {
   font-size: calc(6.4 * var(--font-size));
   font-weight: 700;
   position: relative;
 }
-.key-vision-desc p.title:after {
+.key-vision-desc p.title::after {
   content: " ";
   display: inline-block;
   width: calc(5.5 * var(--font-size));
@@ -82,13 +84,9 @@
     width: 90%;
     max-width: 90%;
     margin: 0 auto calc(4.6 * var(--font-size));
+    order: 1;
   }
-  .key-vision-desc p.title {
-    margin-bottom: calc(1 * var(--font-size));
-    font-size: calc(6 * var(--font-size));
-    text-align: center;
-  }
-  .key-vision-desc p.title::after {
+  .key-vision-desc p.title, .key-vision-desc p.subtitle {
     display: none;
   }
   .key-vision-desc p.subtitle {
@@ -112,15 +110,10 @@
   .key-vision-desc {
     width: 100%;
     max-width: 100%;
-    margin: 0 auto calc(4.6 * var(--font-size));
+    margin: 0 auto;
+    padding-top: calc(4.2 * var(--font-size));
   }
-  .key-vision-desc p {
-    text-align: center;
-  }
-  .key-vision-desc p.title {
-    font-size: calc(4.6 * var(--font-size));
-  }
-  .key-vision-desc p.title::after {
+  .key-vision-desc p.title, .key-vision-desc p.subtitle {
     display: none;
   }
   .key-vision-desc p.txt {

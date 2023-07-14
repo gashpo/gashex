@@ -28,7 +28,7 @@ header {
             align-items: center;
             justify-content: space-between;
 
-            &:after {
+            &::after {
                 content: '';
                 height: calc(0.7 * var(--font-size));
                 width: calc(1.1 * var(--font-size));
@@ -103,15 +103,12 @@ header {
         }
 
         h1.brand-logo {
-            display: flex;
-            align-items: flex-start;
+            font-size: 1em;
 
             a {
-                display: inline-block;
-            }
-
-            img {
-                display: block;
+                display: flex;
+                align-items: center;
+                gap: calc(.8 * var(--font-size));
             }
         }
 
@@ -299,7 +296,6 @@ header {
                     font-size: calc(1.5 * var(--font-size));
                     font-weight: 400;
                     width: max-content;
-                    transition: none;
 
                     &:hover {
                         color: $gray09;
@@ -309,24 +305,6 @@ header {
                 .login-id {
                     flex: 100%;
                     color: $Primary;
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    cursor: pointer;
-
-                    span {
-                        color: $gray06;
-                        display: none;
-                        font-size: calc(1.4 * var(--font-size));
-                    }
-
-                    &.active {
-                        cursor: default;
-
-                        span {
-                            display: inline-block;
-                        }
-                    }
                 }
 
                 &.log-out {
@@ -400,6 +378,8 @@ header {
     }
 }
 
+//max-width: 1200px
+
 @media screen and (max-width: 1024px) {
     header {
         .fixed-top {
@@ -437,7 +417,7 @@ header {
                             display: none;
                         }
 
-                        &:after {
+                        &::after {
                             display: none;
                         }
                     }
@@ -658,3 +638,15 @@ header {
 }
 
 //max-width: 1024px
+
+@media screen and (max-width: 820px) {
+    header {
+        .fixed-top {
+            .btns {
+                margin-left: calc(.4 * var(--font-size));
+            }
+        }
+    }
+}
+
+//max-width: 820px

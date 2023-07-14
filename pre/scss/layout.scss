@@ -52,6 +52,12 @@ body {
     }
 }
 
+@media screen and (max-width: 1200px) {
+    body {
+        background-color: white;
+    }
+}
+
 #app {
     display: flex;
     flex-direction: column;
@@ -169,7 +175,7 @@ h2 {
 //index.html
 .layout-key-vision {
     display: flex;
-    align-items: center;
+    gap: calc(2.4 * var(--font-size));
     justify-content: space-between;
     position: relative;
 
@@ -192,11 +198,23 @@ h2 {
             display: block;
         }
     }
+
+    &.selected {
+        .key-vision-desc {
+            display: none;
+        }
+
+        .key-vision-table {
+            .product-content {
+                display: inline;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 1200px) {
     .layout-key-vision {
-        display: block;
+        flex-wrap: wrap;
         margin: 0 auto;
 
         &.have-sub-banner {
@@ -205,6 +223,49 @@ h2 {
 
                 p.txt {
                     margin-bottom: calc(2.8* var(--font-size));
+                }
+            }
+        }
+
+        &.selected {
+            .key-vision-desc {
+                display: inline;
+            }
+
+            .key-vision-table {
+                flex-wrap: wrap;
+                border: 1px $gray04 solid;
+                border-radius: calc(2.4 * var(--font-size));
+                background-color: $gray01;
+
+                .selection {
+                    flex: 100%;
+                    border: none;
+                    border-radius: 0;
+                    background-color: transparent;
+                    padding: calc(2 * var(--font-size)) calc(1.6 * var(--font-size));
+                }
+
+                .product-content {
+                    flex: 100%;
+                    max-width: 100%;
+                    max-height: none;
+                    padding: calc(2 * var(--font-size)) calc(1.6 * var(--font-size));
+                }
+
+                .checkout {
+                    position: fixed;
+                    background-color: white;
+                    padding: calc(2 * var(--font-size)) calc(3.2 * var(--font-size));
+                    box-shadow: 0 -4px 4px rgba(black, .25);
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+
+                    .checkbox {
+                        margin-top: 0;
+                        margin-bottom: calc(1.6 * var(--font-size));
+                    }
                 }
             }
         }

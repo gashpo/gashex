@@ -49,6 +49,20 @@
                             <button @click="openSubMenu">
                                 <p>連接錢包</p>
                             </button>
+                            <div class="subMenu-box desk">
+                                <ul>
+                                    <li class="log-in">
+                                        <span class="log-title">錢包地址</span>
+                                        <a href="#">登出</a>
+                                        <span class="login-id">0x130...123D</span>
+                                    </li>
+                                    <li class="log-out">
+                                        <span class="log-title">beanfun! 會員</span>
+                                        <a href="#">登入</a>
+                                        <span class="login-id">小丸子的玩家暱稱</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <button class="m-nav-icon" @click="openNav">
@@ -77,25 +91,22 @@
                     </ul>
                 </div> -->
             </nav>
-            <div class="subMenu-box">
+            <div class="subMenu-box mobile">
                 <div class="content">
                     <div class="subMenu">
                         <button class="hide" @click="hideSubMenu"><img src="images/icon/ic-m-nav-hide.svg"></button>
                         <!-- <div class="points"><img src="images/icon/ic-dGash.svg">300,000</div> -->
                         <ul>
-                            <li :class="[isWalletLogIn ? 'log-in' : 'log-out']">
+                            <li class="log-in">
                                 <span class="log-title">錢包地址</span>
-                                <a @click="walletLog" href="javascript:void(0)"
-                                    v-html="isWalletLogIn ? '登出' : '登入'"></a>
-                                <span @click="copyAddr" id="addr" class="login-id" :class="copied? 'active': ''">
-                                    0x130...123D <img src="images/icon/ic-copy.svg"> <span v-show="copied">複製成功</span>
-                                </span>
+                                <a href="#">登出</a>
+                                <span class="login-id">0x130...123D</span>
                             </li>
-                            <!-- <li :class="[isBfLogIn ? 'log-in' : 'log-out']">
+                            <li class="log-out">
                                 <span class="log-title">beanfun! 會員</span>
-                                <a @click="bfLog" href="#" v-html="isBfLogIn ? '登出' : '登入'"></a>
+                                <a href="#">登入</a>
                                 <span class="login-id">小丸子的玩家暱稱</span>
-                            </li> -->
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -287,31 +298,32 @@
             data() {
                 return {
                     activelang: '1',
-                    isWalletLogIn: false,
-                    isBfLogIn: false,
-                    copied: false,
                 }
             },
             methods: {
                 openLang: function () {
                     var windowW = window.innerWidth;
-                    $('#lang-box').toggleClass('show');
+                    $('#lang-box').slideToggle();
                     // $('body').toggleClass('hidden');
-                    $('.subMenu-box').removeClass('show');
+                    // $('#lang-box').css('z-index', '4');
+                    // $('.subMenu-box').css('z-index', '1');
+                    $('.subMenu-box').slideUp();
                 },
                 openSubMenu: function () {
                     var windowW = window.innerWidth;
-                    $('.subMenu-box').toggleClass('show');
+                    $('.subMenu-box').slideToggle();
                     // $('body').toggleClass('hidden');
-                    $('#lang-box').removeClass('show');
+                    // $('.subMenu-box').css('z-index', '4');
+                    // $('#lang-box').css('z-index', '1');
+                    $('#lang-box').slideUp();
 
-                    if (windowW <= 1024) {
+                    if (windowW <= 900) {
                         $('.black-wall').toggle();
                     }
                 },
                 hideSubMenu: function () {
                     $('.black-wall').hide();
-                    $('.subMenu-box').toggleClass('show');
+                    $('.subMenu-box').slideToggle();
                     $('body').removeClass('hidden');
                 },
                 openLang_m: function () {
@@ -321,32 +333,18 @@
                 },
                 openNav: function () {
                     var windowW = window.innerWidth;
-                    $('nav').toggleClass('show');
+                    $('nav').slideToggle();
                     $('body').toggleClass('hidden');
 
-                    if (windowW <= 1024) {
+                    if (windowW <= 900) {
                         $('.black-wall').toggle();
-                        $('#lang-box').removeClass('show');
+                        $('#lang-box').slideUp();
                     }
                 },
                 hideNav: function () {
                     $('.black-wall').hide();
-                    $('nav').toggleClass('show');
+                    $('nav').slideToggle();
                     $('body').removeClass('hidden');
-                },
-                walletLog: function () {
-                    this.isWalletLogIn = !this.isWalletLogIn;
-                },
-                bfLog: function () {
-                    this.isBfLogIn = !this.isBfLogIn;
-                },
-                copyAddr: function () {
-                    $('#addr').select();
-                    document.execCommand('copy');
-                    this.copied = true
-                    window.setTimeout(function () {
-                        vm.copied = false
-                    }, 5000);
                 },
                 hideBlackWall: function () {
                     var windowW = window.innerWidth;
@@ -360,7 +358,6 @@
             },
         });
 
-        /*
         $(document).mouseup(function (e) {
             var windowW = window.innerWidth;
             var subMenuBox = $(".subMenu-box");
@@ -386,7 +383,6 @@
                 }
             };
         });
-        */
     </script>
 </body>
 
