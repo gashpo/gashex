@@ -481,6 +481,10 @@
 .key-vision-table .product-content img {
   max-width: 100%;
 }
+.key-vision-table .product-content ul {
+  list-style-type: disc;
+  padding-left: calc(2.8 * var(--font-size));
+}
 .key-vision-table .product-content ol {
   list-style-type: decimal;
   padding-left: calc(2.8 * var(--font-size));
@@ -489,6 +493,9 @@
 .key-vision-table .product-content p,
 .key-vision-table .product-content ol {
   margin-bottom: calc(1.6 * var(--font-size));
+}
+.key-vision-table .product-content p + ol {
+  margin-top: calc(-1.6 * var(--font-size));
 }
 
 @media screen and (max-width: 1200px) {

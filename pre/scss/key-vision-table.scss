@@ -582,6 +582,11 @@ $Primary: #E7316A;
             max-width: 100%;
         }
 
+        ul {
+            list-style-type: disc;
+            padding-left: calc(2.8 * var(--font-size));
+        }
+
         ol {
             list-style-type: decimal;
             padding-left: calc(2.8 * var(--font-size));
@@ -591,6 +596,10 @@ $Primary: #E7316A;
         p,
         ol {
             margin-bottom: calc(1.6 * var(--font-size));
+        }
+
+        p+ol {
+            margin-top: calc(-1.6 * var(--font-size));
         }
     }
 }
