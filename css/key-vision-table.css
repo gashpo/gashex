@@ -505,6 +505,7 @@
   }
   .key-vision-table .selection {
     padding: calc(2 * var(--font-size)) calc(1.6 * var(--font-size));
+    max-width: none;
   }
 }
 @media screen and (max-width: 820px) {

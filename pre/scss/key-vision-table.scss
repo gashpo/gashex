@@ -611,6 +611,7 @@ $Primary: #E7316A;
 
         .selection {
             padding: calc(2 * var(--font-size)) calc(1.6 * var(--font-size));
+            max-width: none;
         }
     }
 }
