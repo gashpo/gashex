@@ -13,7 +13,7 @@ $Primary: #E7316A;
 
 .page-ontop-desc {
     width: 50%;
-    max-width: 455px;
+    // max-width: 455px;
     margin: 10vh auto calc(3.8 * var(--font-size));
     text-align: center;
 
@@ -31,12 +31,22 @@ $Primary: #E7316A;
         &.desc {
             font-size: calc(1.5 * var(--font-size));
             color: $gray08;
+            text-align: left;
+            margin-bottom: var(--font-size);
         }
 
         &.desc-l {
             font-size: calc(2 * var(--font-size));
             font-weight: 500;
         }
+    }
+
+    ol {
+        font-size: calc(1.5 * var(--font-size));
+        list-style-type: decimal;
+        text-align: left;
+        padding-left: calc(2 * var(--font-size));
+        margin-bottom: var(--font-size);
     }
 
     .btns {
